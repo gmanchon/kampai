@@ -13,4 +13,8 @@ if exit_code == 0:
     print("please change your working directory before running this command")
     exit(1)
 
-print("hello")
+# retrieving package content
+package_path = os.path.dirname(os.path.dirname(__file__))
+template_path = os.path.join(package_path, "canai", "templates", "pred")
+print(package_path)
+print(template_path)
