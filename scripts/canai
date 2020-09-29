@@ -64,9 +64,9 @@ if git_init_code != 0:
 
 # replace tokens in all files
 replacements = dict(
-    CANAI_PACKAGE_NAME='package name',
-    CANAI_PACKAGE_DESCRIPTION='package description',
-    CANAI_PACKAGE_SCRIPT='package script name')
+    CANAI_PACKAGE_NAME=package_name,
+    CANAI_PACKAGE_DESCRIPTION='Package description',
+    CANAI_PACKAGE_SCRIPT='package_script_name')
 
 for key, value in replacements.items():
 
@@ -80,6 +80,23 @@ for key, value in replacements.items():
 
     if replace_code != 0:
         print("error replacing tokens: %s (%s)" % (replace_code, replace_cmd))
+
+        exit(1)
+
+# replace package slug
+dir_replacements = dict(
+    CANAI_PACKAGE_SLUG=package_name)
+
+for key, value in dir_replacements.items():
+
+    dir_replace_cmd = "cd %s " \
+                      " && mv %s %s" % (package_name, key, value)
+
+    dir_replace_code = os.system(dir_replace_cmd)
+
+    if dir_replace_code != 0:
+        print("error replacing dir tokens: %s (%s)"
+              "" % (dir_replace_code, dir_replace_cmd))
 
         exit(1)
 
