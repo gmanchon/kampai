@@ -2,26 +2,49 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 
 # make sure that we are not in a git repo
-exit_code = os.system("git status &>/dev/null")
+git_code = os.system("git status &>/dev/null")
 
-if exit_code == 0:
+if git_code == 0:
     cwd = os.getcwd()
+
     print("you are sitting in %s which appears to be part of "
           "a git repository" % cwd)
     print("this command cannot be run in a git repository")
     print("please change your working directory before running this command")
+
     exit(1)
 
 # retrieving package content
 package_path = os.path.dirname(os.path.dirname(__file__))
 template_path = os.path.join(package_path, "canai", "templates", "pred")
-print(package_path)
-print(template_path)
 
-# TODO: create project folder
+# validate command parameters
+if len(sys.argv) != 3 or sys.argv[1] != "new":
+    script = os.path.basename(sys.argv[0])
 
-# TODO: copy template
+    print("usage: %s new PACKAGE" % script)
 
-# TODO: create git repo
+    exit(1)
+
+# checking whether project already exists
+package_name = sys.argv[2]
+
+if os.path.isfile(package_name) or os.path.isdir(package_name):
+    print("target project %s already exists" % package_name)
+
+    exit(1)
+
+# create project from template
+copy_cmd = "cp -R %s %s &>/dev/null" % (template_path, package_name)
+
+copy_code = os.system(copy_cmd)
+
+if copy_code != 0:
+    print("error creating project: %s (%s)" % (copy_code, copy_cmd))
+
+    exit(1)
+
+# init git repo
