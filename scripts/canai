@@ -5,7 +5,9 @@ import os
 import sys
 
 # make sure that we are not in a git repo
-git_code = os.system("git status &>/dev/null")
+git_cmd = "git status &>/dev/null"
+
+git_code = os.system(git_cmd)
 
 if git_code == 0:
     cwd = os.getcwd()
@@ -48,3 +50,16 @@ if copy_code != 0:
     exit(1)
 
 # init git repo
+git_init_cmd = "cd %s " \
+               " && git init &>/dev/null " \
+               " && git add . &>/dev/null " \
+               " && git commit -m 'initial commit' &>/dev/null " % package_name
+
+git_init_code = os.system(git_init_cmd)
+
+if git_init_code != 0:
+    print("error initializing git repo: %s" % git_init_code)
+
+    exit(1)
+
+print("project %s created!" % package_name)
