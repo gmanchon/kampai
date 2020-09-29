@@ -40,7 +40,7 @@ if os.path.isfile(package_name) or os.path.isdir(package_name):
     exit(1)
 
 # create project from template
-copy_cmd = "cp -R %s %s &>/dev/null" % (template_path, package_name)
+copy_cmd = "cp -R %s %s" % (template_path, package_name)
 
 copy_code = os.system(copy_cmd)
 
@@ -52,7 +52,7 @@ if copy_code != 0:
 # init git repo
 git_init_cmd = "cd %s " \
                " && git init &>/dev/null " \
-               " && git add . &>/dev/null " \
+               " && git add . " \
                " && git commit -m 'initial commit' &>/dev/null" % package_name
 
 git_init_code = os.system(git_init_cmd)
@@ -85,8 +85,9 @@ for key, value in replacements.items():
 
 # init git repo
 git_init_cmd = "cd %s " \
-               " && git add . &>/dev/null " \
-               " && git commit -m 'replaced tokens' &>/dev/null" % package_name
+               " && git add . " \
+               " && git commit -m 'replaced tokens' &>/dev/null " \
+               "" % package_name
 
 git_init_code = os.system(git_init_cmd)
 
