@@ -73,7 +73,7 @@ replacements = dict(
 
 for key, value in replacements.items():
 
-    # find . -type f recursively finds all files
+    # find . -type f recursively finds all files (only files)
     # grep -v git ignores files matching the pattern git
     # xargs converts the list of files into parameters for sed
     # sed -i '' 's/a/b/g' replaces the pattern a by b in the files
