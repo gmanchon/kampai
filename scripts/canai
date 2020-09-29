@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# this could have probably been written in shell script instead of python...
+
 import os
 import sys
 
