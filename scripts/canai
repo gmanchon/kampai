@@ -53,7 +53,40 @@ if copy_code != 0:
 git_init_cmd = "cd %s " \
                " && git init &>/dev/null " \
                " && git add . &>/dev/null " \
-               " && git commit -m 'initial commit' &>/dev/null " % package_name
+               " && git commit -m 'initial commit' &>/dev/null" % package_name
+
+git_init_code = os.system(git_init_cmd)
+
+if git_init_code != 0:
+    print("error initializing git repo: %s" % git_init_code)
+
+    exit(1)
+
+# replace tokens in all files
+replacements = dict(
+    CANAI_PACKAGE_NAME='package name',
+    CANAI_PACKAGE_DESCRIPTION='package description',
+    CANAI_PACKAGE_SCRIPT='package script name')
+
+for key, value in replacements.items():
+
+    replace_cmd = "cd %s " \
+                  " && find . -type f " \
+                  " | grep -v git " \
+                  " | xargs sed -i '' 's/%s/%s/g' " \
+                  "" % (package_name, key, value)
+
+    replace_code = os.system(replace_cmd)
+
+    if replace_code != 0:
+        print("error replacing tokens: %s (%s)" % (replace_code, replace_cmd))
+
+        exit(1)
+
+# init git repo
+git_init_cmd = "cd %s " \
+               " && git add . &>/dev/null " \
+               " && git commit -m 'replaced tokens' &>/dev/null" % package_name
 
 git_init_code = os.system(git_init_cmd)
 
