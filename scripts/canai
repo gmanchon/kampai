@@ -8,7 +8,8 @@ exit_code = os.system("git status &>/dev/null")
 
 if exit_code == 0:
     cwd = os.getcwd()
-    print(f"you are sitting in {cwd} which appears to be part of a git repository")
+    print("you are sitting in %s which appears to be part of "
+          "a git repository" % cwd)
     print("this command cannot be run in a git repository")
     print("please change your working directory before running this command")
     exit(1)
@@ -18,3 +19,9 @@ package_path = os.path.dirname(os.path.dirname(__file__))
 template_path = os.path.join(package_path, "canai", "templates", "pred")
 print(package_path)
 print(template_path)
+
+# TODO: create project folder
+
+# TODO: copy template
+
+# TODO: create git repo
