@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # this could have probably been written in shell script instead of python...
+# this need to be refactored and clarified
 
 import os
 import sys
