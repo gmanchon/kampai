@@ -1,3 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-print('hello')
+
+import os
+
+# make sure that we are not in a git repo
+exit_code = os.system("git status &>/dev/null")
+
+if exit_code == 0:
+    cwd = os.getcwd()
+    print(f"you are sitting in {cwd} which appears to be part of a git repository")
+    print("this command cannot be run in a git repository")
+    print("please change your working directory before running this command")
+    exit(1)
+
+print("hello")
