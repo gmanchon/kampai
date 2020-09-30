@@ -1,4 +1,28 @@
 
+# todo
+
+let constructing a ds project boilerplate the goal of the de week
+let this package automate it once teached
+
+allow user to input parameters for gcp and other cloud providers
+... or use gcloud command to retrieve them?
+
+allow user to select a base template:
+- front web: streamlit
+- front api: fastapi, flask
+- back pred ml: gcr, gke
+- back pred deep: gke
+- back train: gaip
+
+allow user to create sklearn pipeline and transformers
+- rails g pipeline // with 2 steps for debug
+- rails g transformer col_a col_b --output col_c col_d
+- rails show pipeline sample 100 // show first 100 lines transformed
+- rails g model xgboost // add xgboost model
+- rails train
+
+=> add all sklearn features as commands?
+
 # install
 
 ``` bash
