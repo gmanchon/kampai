@@ -1,13 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import pandas as pd
+
 import click
 from colorama import Fore
 
 import os
 
 
-def is_cwd_within_kanpai_generated_project():
+def is_cwd_within_kanpai_generated_project(print_error_if_not_within=False):
+    """
+    checks whether the current working directory is a git repo
+    that was generated using kanpai by verifying that the first commit
+    contains the kanpai commit signature
+    """
 
     # retrieving first commit of current working directory
     # git log --oneline returns one commit per line
@@ -15,19 +22,42 @@ def is_cwd_within_kanpai_generated_project():
     # which is read by os.popen
     # tail -1 retrieves the first commit of the git repo
     git_log_cmd = "git log --oneline 2>/dev/null " \
-               " | tail -1"
+                  " | tail -1"
 
-    git_first_commit = os.popen(git_log_cmd).read()  # os.system(git_log_cmd)
+    git_first_commit = os.popen(git_log_cmd).read()
 
     # checking whether first commit was performed by kanpai
+    # TODO: import from canai script or common file
     commit_signature = "kanpai 🎉 🍰"  # uniquelly identifies a kanpai project
 
     if commit_signature not in git_first_commit:
-        print("not a git repository: %s (%s)" % (git_first_commit, git_log_cmd))
+        if print_error_if_not_within:
+            print(Fore.RED + "This command needs to be run "
+                  "within a kanpai generated project... 😅")
 
         return False
 
     return True
+
+
+def get_generated_project_top_level():
+    """
+    retrieves the top level of the generated kanpai project
+    which corresponds to the top level of the git repository
+    """
+
+    # getting git repo top level
+    get_root_cmd = "git rev-parse --show-toplevel"
+
+    root_path = os.popen(get_root_cmd).read().strip()
+
+    if root_path == "":
+        print("error getting git repo top level: %s (%s)"
+              % (root_path, get_root_cmd))
+
+        exit(1)
+
+    return root_path
 
 
 @click.group()
@@ -35,13 +65,32 @@ def greet():
     pass
 
 
-@greet.command()
-def fetch():  # data
+@greet.command(help="fetches data from a csv ressource, "
+               "returns the taxifare csv if DATA is not specified")
+@click.argument("data", default="taxifare")
+@click.option("--nrows", "-n", "nrows", default=1_000,
+              help="number of rows to retrieve, -1 to retrieve all")
+def fetch(data, nrows):
+    """
+    fetches data csv ressource url and stores it locally for further processing
+    """
 
     # check context: within project or within
-    res = is_cwd_within_kanpai_generated_project()
+    is_kanpai = is_cwd_within_kanpai_generated_project(True)
 
-    print(res)
+    if not is_kanpai:
+        exit(1)
+
+    # checking data parameter
+    if data == "taxifare":
+        data = "s3://wagon-public-datasets/taxi-fare-train.csv"
+
+    # fetching data
+    df = pd.read_csv(data, nrows=nrows)
+
+    # saving data locally
+    project_root = get_generated_project_top_level()
+    df.to_csv(os.path.join(project_root, "data", "data.csv"))
 
 
 @greet.command()
