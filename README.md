@@ -32,6 +32,19 @@ allow user to create sklearn pipeline and transformers
 - canai // standard scaler
 - canai // simple imputer
 
+- get data
+- generate empty pipeline with 2 steps
+- list pipeline columns (in, out)
+- add col transformer
+- affect model type
+- train (locally ?) vs gcp
+- save model / code / perf
+- push to gcr a version of model / code / perf
+- make pred
+AFFICHER LE STATUS DU PROJET:
+fetch > clean > preproc > train > push > pred > perf > validate
+check prev step is ok
+
 # install
 
 ``` bash
