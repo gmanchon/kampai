@@ -4,10 +4,44 @@
 import click
 from colorama import Fore
 
+import os
+
+
+def is_cwd_within_kanpai_generated_project():
+
+    # retrieving first commit of current working directory
+    # git log --oneline returns one commit per line
+    # 2>/dev/null eliminates errors but not the standard output,
+    # which is read by os.popen
+    # tail -1 retrieves the first commit of the git repo
+    git_log_cmd = "git log --oneline 2>/dev/null " \
+               " | tail -1"
+
+    git_first_commit = os.popen(git_log_cmd).read()  # os.system(git_log_cmd)
+
+    # checking whether first commit was performed by kanpai
+    commit_signature = "kanpai 🎉 🍰"  # uniquelly identifies a kanpai project
+
+    if commit_signature not in git_first_commit:
+        print("not a git repository: %s (%s)" % (git_first_commit, git_log_cmd))
+
+        return False
+
+    return True
+
 
 @click.group()
 def greet():
     pass
+
+
+@greet.command()
+def fetch():  # data
+
+    # check context: within project or within
+    res = is_cwd_within_kanpai_generated_project()
+
+    print(res)
 
 
 @greet.command()
@@ -34,6 +68,7 @@ def process(in_file, out_file, server_url):
     """ Processes the input file IN and stores the result to
     output file OUT.
     """
+
     print(Fore.GREEN + 'ok')
 
 

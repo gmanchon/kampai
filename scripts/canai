@@ -55,10 +55,13 @@ if copy_code != 0:
     exit(1)
 
 # init git repo
+commit_signature = "kanpai 🎉 🍰"  # uniquelly identifies a kanpai project
+
 git_init_cmd = "cd %s " \
                " && git init &>/dev/null " \
                " && git add . " \
-               " && git commit -m 'initial commit' &>/dev/null" % package_name
+               " && git commit -m 'initial commit by %s' &>/dev/null" \
+               "" % (package_name, commit_signature)
 
 git_init_code = os.system(git_init_cmd)
 
@@ -122,4 +125,4 @@ if git_init_code != 0:
 
     exit(1)
 
-print(Fore.GREEN + "project %s created!" % package_name)
+print(Fore.GREEN + "Project %s successfully created! 🎉 🍰" % package_name)
