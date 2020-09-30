@@ -15,11 +15,11 @@ allow user to select a base template:
 - back train: gaip
 
 allow user to create sklearn pipeline and transformers
-- rails g pipeline // with 2 steps for debug
-- rails g transformer col_a col_b --output col_c col_d
-- rails show pipeline sample 100 // show first 100 lines transformed
-- rails g model xgboost // add xgboost model
-- rails train
+- canai g pipeline // with 2 steps for debug
+- canai g transformer col_a col_b --output col_c col_d
+- canai show pipeline sample 100 // show first 100 lines transformed
+- canai g model xgboost // add xgboost model
+- canai train
 
 => add all sklearn features as commands?
 
