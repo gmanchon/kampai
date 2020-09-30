@@ -23,6 +23,15 @@ allow user to create sklearn pipeline and transformers
 
 => add all sklearn features as commands?
 
+=> setup virtual env
+
+=> create github project / opt confirm
+
+- canai read a.csv analyse dataset
+- canai clean col_a --no-commit // remove null values
+- canai // standard scaler
+- canai // simple imputer
+
 # install
 
 ``` bash
