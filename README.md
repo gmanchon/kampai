@@ -41,7 +41,10 @@ pip install .
 # usage
 
 ``` bash
-canai new PROJECT_NAME
+canai new PROJECT_NAME        # creates a new data science project
+
+kanpai fetch                  # retrieves csv data from url and stores it locally
+                              # defaults to 1000 of taxifare
 ```
 
 # development
