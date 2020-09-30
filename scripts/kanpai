@@ -9,7 +9,7 @@ from colorama import Fore
 import os
 
 
-def is_cwd_within_kanpai_generated_project(print_error_if_not_within=False):
+def is_cwd_within_generated_project(print_error_if_not_within=False):
     """
     checks whether the current working directory is a git repo
     that was generated using kanpai by verifying that the first commit
@@ -79,7 +79,7 @@ def fetch(data, nrows):
     """
 
     # check context: within project or within
-    is_kanpai = is_cwd_within_kanpai_generated_project(True)
+    is_kanpai = is_cwd_within_generated_project(True)
 
     if not is_kanpai:
         exit(1)
