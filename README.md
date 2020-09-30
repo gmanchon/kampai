@@ -32,6 +32,7 @@ allow user to create sklearn pipeline and transformers
 - canai // standard scaler
 - canai // simple imputer
 
+demo:
 - get data
 - generate empty pipeline with 2 steps
 - list pipeline columns (in, out)

@@ -61,7 +61,7 @@ git_init_cmd = "cd %s " \
                " && git init &>/dev/null " \
                " && git add . " \
                " && git commit -m 'initial commit by %s' &>/dev/null" \
-               "" % (package_name, commit_signature)
+               % (package_name, commit_signature)
 
 git_init_code = os.system(git_init_cmd)
 
@@ -86,7 +86,7 @@ for key, value in replacements.items():
                   " && find . -type f " \
                   " | grep -v git " \
                   " | xargs sed -i '' 's/%s/%s/g' " \
-                  "" % (package_name, key, value)
+                  % (package_name, key, value)
 
     replace_code = os.system(replace_cmd)
 
@@ -108,7 +108,7 @@ for key, value in dir_replacements.items():
 
     if dir_replace_code != 0:
         print("error replacing dir tokens: %s (%s)"
-              "" % (dir_replace_code, dir_replace_cmd))
+              % (dir_replace_code, dir_replace_cmd))
 
         exit(1)
 
@@ -116,7 +116,7 @@ for key, value in dir_replacements.items():
 git_init_cmd = "cd %s " \
                " && git add . " \
                " && git commit -m 'replaced tokens' &>/dev/null " \
-               "" % package_name
+               % package_name
 
 git_init_code = os.system(git_init_cmd)
 
