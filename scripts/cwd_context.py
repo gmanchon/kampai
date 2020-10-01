@@ -48,8 +48,9 @@ def get_generated_project_top_level():
     root_path = os.popen(get_root_cmd).read().strip()
 
     if root_path == "":
-        print("error getting git repo top level: %s (%s)"
-              % (root_path, get_root_cmd))
+        print(Fore.RED + "Error getting git repo top level: %s (%s) 😢"
+              % (root_path, get_root_cmd)
+              + Style.RESET_ALL)
 
         exit(1)
 
