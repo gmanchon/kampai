@@ -4,7 +4,7 @@
 import pandas as pd
 
 import click
-from colorama import Fore
+from colorama import Fore, Style
 
 import os
 
@@ -89,6 +89,10 @@ def fetch(data, nrows):
         data = "s3://wagon-public-datasets/taxi-fare-train.csv"
 
     # fetching data
+    print(Fore.GREEN + "Fetching %s lines from %s data 🚀"
+          % (nrows, data)
+          + Style.RESET_ALL)
+
     df = pd.read_csv(data, nrows=nrows)
 
     # saving data locally
@@ -96,8 +100,9 @@ def fetch(data, nrows):
     data_path = os.path.join(project_root, "data", "data.csv")
     df.to_csv(data_path)
 
-    print(Fore.GREEN + "%s lines of %s data saved to %s"
-          % (nrows, data, data_path))
+    print(Fore.GREEN + "Data saved to %s 👍"
+          % data_path
+          + Style.RESET_ALL)
 
 
 # @greet.command()
