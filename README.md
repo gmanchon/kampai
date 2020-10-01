@@ -32,7 +32,10 @@ allow user to create sklearn pipeline and transformers
 - canai // standard scaler
 - canai // simple imputer
 
+- check invalid chars in project names (ie ds-project)
+
 demo:
+- show project status
 - get data
 - generate empty pipeline with 2 steps
 - list pipeline columns (in, out)
@@ -45,6 +48,14 @@ demo:
 AFFICHER LE STATUS DU PROJET:
 fetch > clean > preproc > train > push > pred > perf > validate
 check prev step is ok
+- how to retrieve the name of the package
+- inject sample notebook using the projet
+inject in json using popular wheel templating lib
+
+- command starting a python maze allowing to trigger commands or deployments
+or at least vizualize status
+
+- make the terminal engaging, gamification on project perf ?
 
 # install
 
