@@ -55,7 +55,9 @@ copy_cmd = "cp -R %s %s" % (template_path, package_name)
 copy_code = os.system(copy_cmd)
 
 if copy_code != 0:
-    print("error creating project: %s (%s)" % (copy_code, copy_cmd))
+    print(Fore.RED + "Error creating project: %s (%s) 😭"
+          % (copy_code, copy_cmd)
+          + Style.RESET_ALL)
 
     exit(1)
 
@@ -71,7 +73,8 @@ git_init_cmd = "cd %s " \
 git_init_code = os.system(git_init_cmd)
 
 if git_init_code != 0:
-    print("error initializing git repo: %s" % git_init_code)
+    print(Fore.RED + "Error initializing git repo: %s 🥺" % git_init_code
+          + Style.RESET_ALL)
 
     exit(1)
 
@@ -96,7 +99,9 @@ for key, value in replacements.items():
     replace_code = os.system(replace_cmd)
 
     if replace_code != 0:
-        print("error replacing tokens: %s (%s)" % (replace_code, replace_cmd))
+        print(Fore.RED + "Error replacing tokens: %s (%s) 😳"
+              % (replace_code, replace_cmd)
+              + Style.RESET_ALL)
 
         exit(1)
 
@@ -112,8 +117,9 @@ for key, value in dir_replacements.items():
     dir_replace_code = os.system(dir_replace_cmd)
 
     if dir_replace_code != 0:
-        print("error replacing dir tokens: %s (%s)"
-              % (dir_replace_code, dir_replace_cmd))
+        print(Fore.RED + "Error replacing dir tokens: %s (%s) 😢"
+              % (dir_replace_code, dir_replace_cmd)
+              + Style.RESET_ALL)
 
         exit(1)
 
@@ -126,7 +132,8 @@ git_init_cmd = "cd %s " \
 git_init_code = os.system(git_init_cmd)
 
 if git_init_code != 0:
-    print("error initializing git repo: %s" % git_init_code)
+    print(Fore.RED + "Error initializing git repo: %s 😞" % git_init_code
+          + Style.RESET_ALL)
 
     exit(1)
 
