@@ -69,7 +69,7 @@ def greet():
 
 
 @greet.command(help="fetches data from a csv ressource, "
-               "returns the taxifare csv if DATA is not specified")
+               "defaults to the taxifare csv")
 @click.argument("data", default="taxifare")
 @click.option("--nrows", "-n", "nrows", default=1_000,
               help="number of rows to retrieve, -1 to retrieve all")
@@ -100,32 +100,32 @@ def fetch(data, nrows):
           % (nrows, data, data_path))
 
 
-@greet.command()
-@click.option("--in", "-i", "in_file", required=True,
-              help="Path to csv file to be processed.",
-              type=click.Path(exists=True, dir_okay=False, readable=True))
-@click.option("--out-file", "-o", default="./output.xlsx",
-              help="Path to excel file to store the result.")
-@click.option('--verbose', is_flag=True, help="Verbose output")
-@click.option(
-    "--dev", "server_url", help="Upload to dev server",
-    flag_value='https://dev.server.org/api/v2/upload',
-)
-@click.option(
-    "--test", "server_url", help="Upload to test server",
-    flag_value='https://test.server.com/api/v2/upload',
-)
-@click.option(
-    "--prod", "server_url", help="Upload to prod server",
-    flag_value='https://real.server.com/api/v2/upload',
-    default=True
-)
-def process(in_file, out_file, server_url):
-    """ Processes the input file IN and stores the result to
-    output file OUT.
-    """
+# @greet.command()
+# @click.option("--in", "-i", "in_file", required=True,
+#               help="Path to csv file to be processed.",
+#               type=click.Path(exists=True, dir_okay=False, readable=True))
+# @click.option("--out-file", "-o", default="./output.xlsx",
+#               help="Path to excel file to store the result.")
+# @click.option('--verbose', is_flag=True, help="Verbose output")
+# @click.option(
+#     "--dev", "server_url", help="Upload to dev server",
+#     flag_value='https://dev.server.org/api/v2/upload',
+# )
+# @click.option(
+#     "--test", "server_url", help="Upload to test server",
+#     flag_value='https://test.server.com/api/v2/upload',
+# )
+# @click.option(
+#     "--prod", "server_url", help="Upload to prod server",
+#     flag_value='https://real.server.com/api/v2/upload',
+#     default=True
+# )
+# def process(in_file, out_file, server_url):
+#     """ Processes the input file IN and stores the result to
+#     output file OUT.
+#     """
 
-    print(Fore.GREEN + 'ok')
+#     print(Fore.GREEN + 'ok')
 
 
 if __name__ == "__main__":
