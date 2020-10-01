@@ -49,6 +49,30 @@ if os.path.isfile(package_name) or os.path.isdir(package_name):
 
     exit(1)
 
+# list content of project template
+ls_template_cmd = "ls %s" % template_path
+
+template_content = os.popen(ls_template_cmd).read().split()
+
+if len(template_content) == 0:
+    print(Fore.RED + "Error listing template package content: %s (%s) 😬"
+          % (template_content, ls_template_cmd)
+          + Style.RESET_ALL)
+
+    exit(1)
+
+# checking whether projet name conflicts with package content
+for file in template_content:
+    if file == package_name:
+        print(Fore.RED + "Cannot create a project named %s 🙃" % package_name
+              + Style.RESET_ALL)
+        print("This project name conflicts with a ressource "
+              "inside of the template package")
+        print("Please avoid the following project names 🙏")
+        print(template_content)
+
+        exit(1)
+
 # create project from template
 copy_cmd = "cp -R %s %s" % (template_path, package_name)
 
