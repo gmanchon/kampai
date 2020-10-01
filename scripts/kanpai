@@ -75,33 +75,6 @@ def fetch(data, nrows):
           + Style.RESET_ALL)
 
 
-# @greet.command()
-# @click.option("--in", "-i", "in_file", required=True,
-#               help="Path to csv file to be processed.",
-#               type=click.Path(exists=True, dir_okay=False, readable=True))
-# @click.option("--out-file", "-o", default="./output.xlsx",
-#               help="Path to excel file to store the result.")
-# @click.option('--verbose', is_flag=True, help="Verbose output")
-# @click.option(
-#     "--dev", "server_url", help="Upload to dev server",
-#     flag_value='https://dev.server.org/api/v2/upload',
-# )
-# @click.option(
-#     "--test", "server_url", help="Upload to test server",
-#     flag_value='https://test.server.com/api/v2/upload',
-# )
-# @click.option(
-#     "--prod", "server_url", help="Upload to prod server",
-#     flag_value='https://real.server.com/api/v2/upload',
-#     default=True
-# )
-# def process(in_file, out_file, server_url):
-#     """ Processes the input file IN and stores the result to
-#     output file OUT.
-#     """
-
-#     print(Fore.GREEN + 'ok')
-
-
 if __name__ == "__main__":
     greet()
+    new.add_command(fetch)
