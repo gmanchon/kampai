@@ -8,4 +8,4 @@ setup(name="canai",
       version="0.1",
       description="Data science project template generator",
       install_requires=requirements,
-      scripts=["scripts/canai", "scripts/kanpai"])
+      scripts=["scripts/kanpai"])

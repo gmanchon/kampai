@@ -155,9 +155,9 @@ class ProjectFactory():
         """
 
         replacements = dict(
-            CANAI_PACKAGE_NAME=self.package_name,
-            CANAI_PACKAGE_DESCRIPTION='Package description',
-            CANAI_PACKAGE_SCRIPT='package_script_name')
+            KANPAI_PACKAGE_NAME=self.package_name,
+            KANPAI_PACKAGE_DESCRIPTION='Package description',
+            KANPAI_PACKAGE_SCRIPT='package_script_name')
 
         for key, value in replacements.items():
 
@@ -186,7 +186,7 @@ class ProjectFactory():
         """
 
         dir_replacements = dict(
-            CANAI_PACKAGE_SLUG=self.package_name)
+            KANPAI_PACKAGE_SLUG=self.package_name)
 
         for key, value in dir_replacements.items():
 

@@ -15,11 +15,11 @@ allow user to select a base template:
 - back train: gaip
 
 allow user to create sklearn pipeline and transformers
-- canai g pipeline // with 2 steps for debug
-- canai g transformer col_a col_b --output col_c col_d
-- canai show pipeline sample 100 // show first 100 lines transformed
-- canai g model xgboost // add xgboost model
-- canai train
+- kanpai g pipeline // with 2 steps for debug
+- kanpai g transformer col_a col_b --output col_c col_d
+- kanpai show pipeline sample 100 // show first 100 lines transformed
+- kanpai g model xgboost // add xgboost model
+- kanpai train
 
 => add all sklearn features as commands?
 
@@ -27,10 +27,10 @@ allow user to create sklearn pipeline and transformers
 
 => create github project / opt confirm
 
-- canai read a.csv analyse dataset
-- canai clean col_a --no-commit // remove null values
-- canai // standard scaler
-- canai // simple imputer
+- kanpai read a.csv analyse dataset
+- kanpai clean col_a --no-commit // remove null values
+- kanpai // standard scaler
+- kanpai // simple imputer
 
 - check invalid chars in project names (ie ds-project)
 
@@ -66,10 +66,12 @@ pip install .
 # usage
 
 ``` bash
-canai new PROJECT_NAME        # creates a new data science project
+kanpai new PROJECT_NAME       # creates a new data science project
 
 kanpai fetch                  # retrieves csv data from url and stores it locally
                               # defaults to 1000 of taxifare
+
+kanpai head                   # displays head of fetched data
 ```
 
 # development
@@ -84,12 +86,12 @@ pip install -e .
 
 ## directories
 
-CANAI_PACKAGE_SLUG            package_directory_name
+KANPAI_PACKAGE_SLUG            package_directory_name
 
 ## files
 
-CANAI_PACKAGE_NAME            package_name
+KANPAI_PACKAGE_NAME            package_name
 
-CANAI_PACKAGE_DESCRIPTION     Package description
+KANPAI_PACKAGE_DESCRIPTION     Package description
 
-CANAI_PACKAGE_SCRIPT          package_script_name
+KANPAI_PACKAGE_SCRIPT          package_script_name

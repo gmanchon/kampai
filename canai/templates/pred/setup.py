@@ -4,9 +4,9 @@ with open("requirements.txt") as f:
     content = f.readlines()
 requirements = [x.strip() for x in content]
 
-setup(name="CANAI_PACKAGE_NAME",
+setup(name="KANPAI_PACKAGE_NAME",
       version="1.0",
-      description="CANAI_PACKAGE_DESCRIPTION",
+      description="KANPAI_PACKAGE_DESCRIPTION",
       packages=find_packages(),
       install_requires=requirements,
-      scripts=["scripts/CANAI_PACKAGE_SCRIPT"])
+      scripts=["scripts/KANPAI_PACKAGE_SCRIPT"])
