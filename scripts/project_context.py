@@ -64,7 +64,8 @@ def get_package_name():
     # getting git repo top level
     get_name_cmd = "cat setup.py | grep 'setup(name=\"'"
 
-    name = os.popen(get_name_cmd).read().strip("setup(name=\"").strip('",\n')
+    name = os.popen(get_name_cmd).read().strip("setup(name=")
+    name = name.strip().strip(',').strip('"')
 
     if name == "":
         print(Fore.RED + "Error getting package name: %s (%s) 😢"

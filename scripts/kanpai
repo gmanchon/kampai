@@ -22,6 +22,13 @@ def get_data_path():
     return data_path
 
 
+def assert_within_project():
+    is_kanpai = is_cwd_within_generated_project(True)
+
+    if not is_kanpai:
+        exit(1)
+
+
 @click.group()
 def greet():
     """
@@ -56,11 +63,7 @@ def fetch(data, nrows):
     fetches data csv ressource url and stores it locally for further processing
     """
 
-    # check context: within project or within
-    is_kanpai = is_cwd_within_generated_project(True)
-
-    if not is_kanpai:
-        exit(1)
+    assert_within_project()
 
     # checking data parameter
     if data == "iris":
@@ -100,9 +103,36 @@ def head(nrows):
     shows head of fetched dataset
     """
 
+    assert_within_project()
+
+    # show head
     data_path = get_data_path()
     df = pd.read_csv(data_path, nrows=nrows)
     print(df.head(nrows))
+
+
+# @greet.command(help="installs package")
+# def install():
+#     """
+#     installs package
+#     """
+
+#     assert_within_project()
+
+#     # install package
+#     pip_install_cmd = "pip install ."
+
+#     pip_code = os.system(pip_install_cmd)
+
+#     if pip_code != 0:
+#         print(Fore.RED + "Error installing package: %s (%s) 😢"
+#               % (pip_code, pip_install_cmd)
+#               + Style.RESET_ALL)
+
+#         exit(1)
+
+#     print(Fore.GREEN + "Package installed! 👍"
+#           + Style.RESET_ALL)
 
 
 @greet.command(help="tains model")
@@ -111,7 +141,21 @@ def train():
     trains models
     """
 
-    print(get_package_name())
+    assert_within_project()
+
+    # get project package name
+    package_name = get_package_name()
+
+    # loading trainer code
+    # https://stackoverflow.com/questions/547829/how-to-dynamically-load-a-python-class
+    mod = __import__("%s.trainer" % package_name, fromlist=['Trainer'])
+    trainer_class = getattr(mod, 'Trainer')
+
+    # instanciating trainer
+    trainer = trainer_class()
+
+    # running trainer
+    trainer.train()
 
 
 if __name__ == "__main__":
