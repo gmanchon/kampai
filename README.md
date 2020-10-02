@@ -65,6 +65,8 @@ rails classes, not only rails command
 
 - KANPAI_PACKAGE_ROOT allows to trun commands from anywhere in the project structure
 
+- no need to install the generated package in order to use the kanpai scripts
+
 # install
 
 ``` bash
