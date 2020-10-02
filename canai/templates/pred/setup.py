@@ -8,5 +8,4 @@ setup(name="KANPAI_PACKAGE_NAME",
       version="1.0",
       description="KANPAI_PACKAGE_DESCRIPTION",
       packages=find_packages(),
-      install_requires=requirements,
-      scripts=["scripts/KANPAI_PACKAGE_SCRIPT"])
+      install_requires=requirements)
