@@ -70,6 +70,8 @@ rails classes, not only rails command
 - refacto : clarify the context the functions are supposed to be used in
 (project generation by script, inside of project by script, inside of project by project)
 
+- list created files at each step (kanpai new, kanpai generate, etc)
+
 # install
 
 ``` bash
