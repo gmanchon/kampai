@@ -143,6 +143,8 @@ def train():
 
     assert_within_project()
 
+    print("Loading trainer...")
+
     # get project package name
     package_name = get_package_name()
 
@@ -154,8 +156,14 @@ def train():
     # instanciating trainer
     trainer = trainer_class()
 
+    print("Training model...")
+
     # running trainer
-    trainer.train()
+    rmse = trainer.train()
+
+    print(Fore.GREEN + "Model trained, rmse: %s 👍"
+          % rmse
+          + Style.RESET_ALL)
 
 
 if __name__ == "__main__":
