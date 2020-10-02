@@ -67,6 +67,9 @@ rails classes, not only rails command
 
 - no need to install the generated package in order to use the kanpai scripts
 
+- refacto : clarify the context the functions are supposed to be used in
+(project generation by script, inside of project by script, inside of project by project)
+
 # install
 
 ``` bash
