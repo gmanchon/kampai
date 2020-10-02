@@ -2,6 +2,7 @@
 from colorama import Fore, Style
 
 import os
+import re
 
 from .project_context import COMMIT_SIGNATURE
 
@@ -19,6 +20,9 @@ class ProjectFactory():
         """
         creates new project from template
         """
+
+        # make sure package name is valid
+        self.__assess_package_name()
 
         # make sure that we are not in a git repo
         self.__ensure_cwd_not_within_git_repo()
@@ -46,6 +50,16 @@ class ProjectFactory():
 
         print(Fore.GREEN + "Project %s successfully created! 🎉 🍰"
               % self.package_name)
+
+    def __assess_package_name(self):
+        is_valid = bool(re.match(r"^[a-zA-Z]\w*", self.package_name))
+
+        if not is_valid:
+            print(Fore.RED + "Invalid package name 😵"
+                  + Style.RESET_ALL)
+            print("Please use letters, numbers or underscores 🙏")
+
+            exit(1)
 
     def __ensure_cwd_not_within_git_repo(self):
         """
