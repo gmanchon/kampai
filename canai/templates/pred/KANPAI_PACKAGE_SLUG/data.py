@@ -5,7 +5,7 @@ import os
 
 
 def get_data():
-    project_root = "KANPAI_PACKAGE_ROOT"
+    project_root = os.path.dirname(os.path.dirname(__file__))
     data_path = os.path.join(project_root, "data", "data.csv")
     df = pd.read_csv(data_path)
     return df
