@@ -3,7 +3,8 @@
 
 from scripts.project_factory import ProjectFactory
 from scripts.project_context import (is_cwd_within_generated_project,
-                                     get_generated_project_top_level)
+                                     get_generated_project_top_level,
+                                     get_package_name)
 
 import numpy as np
 import pandas as pd
@@ -95,10 +96,22 @@ def fetch(data, nrows):
 @click.option("--nrows", "-n", "nrows", default=5,
               help="number of rows to retrieve, -1 to retrieve all")
 def head(nrows):
+    """
+    shows head of fetched dataset
+    """
 
     data_path = get_data_path()
     df = pd.read_csv(data_path, nrows=nrows)
     print(df.head(nrows))
+
+
+@greet.command(help="tains model")
+def train():
+    """
+    trains models
+    """
+
+    print(get_package_name())
 
 
 if __name__ == "__main__":

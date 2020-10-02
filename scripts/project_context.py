@@ -54,3 +54,23 @@ def get_generated_project_top_level():
         exit(1)
 
     return root_path
+
+
+def get_package_name():
+    """
+    retrieves project package name from setup.py
+    """
+
+    # getting git repo top level
+    get_name_cmd = "cat setup.py | grep 'setup(name=\"'"
+
+    name = os.popen(get_name_cmd).read().strip("setup(name=\"").strip('",\n')
+
+    if name == "":
+        print(Fore.RED + "Error getting package name: %s (%s) 😢"
+              % (name, get_name_cmd)
+              + Style.RESET_ALL)
+
+        exit(1)
+
+    return name
