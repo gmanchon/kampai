@@ -149,13 +149,19 @@ class ProjectFactory():
 
             exit(1)
 
+    def __get_package_class(self, package_name):
+        return ''.join([s.capitalize() for s in package_name.split("_")])
+
     def __replace_package_tokens(self):
         """
         replace template tokens within project
         """
 
+        package_class = self.__get_package_class(self.package_name)
+
         replacements = dict(
             KANPAI_PACKAGE_NAME=self.package_name,
+            KANPAI_PACKAGE_CLASS=package_class,
             KANPAI_PACKAGE_DESCRIPTION='Package description',
             KANPAI_PACKAGE_SCRIPT='package_script_name')
 

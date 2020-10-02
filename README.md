@@ -75,6 +75,8 @@ kanpai fetch                  # retrieves csv data from url and stores it locall
                               # defaults to 1000 of taxifare
 
 kanpai head                   # displays head of fetched data
+
+kanpai train                  # trains model
 ```
 
 # development
@@ -94,6 +96,8 @@ KANPAI_PACKAGE_SLUG            package_directory_name
 ## files
 
 KANPAI_PACKAGE_NAME            package_name
+
+KANPAI_PACKAGE_CLASS           PackageName
 
 KANPAI_PACKAGE_DESCRIPTION     Package description
 
