@@ -51,6 +51,9 @@ check prev step is ok
 - how to retrieve the name of the package
 - inject sample notebook using the projet
 inject in json using popular wheel templating lib
+- generate api
+- generate front
+- show pred in both
 
 - command starting a python maze allowing to trigger commands or deployments
 or at least vizualize status
