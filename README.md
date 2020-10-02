@@ -72,6 +72,10 @@ rails classes, not only rails command
 
 - list created files at each step (kanpai new, kanpai generate, etc)
 
+- activate the virtual env of the project when running a command
+
+- clone templates from url / git version
+
 # install
 
 ``` bash
