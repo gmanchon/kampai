@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from scripts.project_factory import ProjectFactory
+from scripts.project_context import (is_cwd_within_generated_project,
+                                     get_generated_project_top_level)
+
+import numpy as np
 import pandas as pd
+from sklearn.datasets import load_iris
 
 import click
 from colorama import Fore, Style
 
 import os
-
-from scripts.project_factory import ProjectFactory
-
-from scripts.project_context import (is_cwd_within_generated_project,
-                                     get_generated_project_top_level)
 
 
 def get_data_path():
@@ -61,15 +62,25 @@ def fetch(data, nrows):
         exit(1)
 
     # checking data parameter
-    if data == "taxifare":
-        data = "s3://wagon-public-datasets/taxi-fare-train.csv"
+    if data == "iris":
 
-    # fetching data
-    print(Fore.GREEN + "Fetching %s lines from %s data 🚀"
-          % (nrows, data)
-          + Style.RESET_ALL)
+        # fetching data
+        iris = load_iris()
+        df = pd.DataFrame(data=np.c_[iris.data, iris.target],
+                          columns=iris.feature_names + ['target']) \
+               .head(nrows)
 
-    df = pd.read_csv(data, nrows=nrows)
+    else:
+
+        if data == "taxifare":
+            data = "s3://wagon-public-datasets/taxi-fare-train.csv"
+
+        # fetching data
+        print(Fore.GREEN + "Fetching %s lines from %s data 🚀"
+              % (nrows, data)
+              + Style.RESET_ALL)
+
+        df = pd.read_csv(data, nrows=nrows)
 
     # saving data locally
     data_path = get_data_path()
