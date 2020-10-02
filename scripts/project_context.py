@@ -62,7 +62,10 @@ def get_package_name():
     """
 
     # getting git repo top level
-    get_name_cmd = "cat setup.py | grep 'setup(name=\"'"
+    project_root = get_generated_project_top_level()
+    get_name_cmd = "cd %s " \
+                   " && cat setup.py | grep 'setup(name=\"'" \
+                   % project_root
 
     name = os.popen(get_name_cmd).read().strip("setup(name=")
     name = name.strip().strip(',').strip('"')
