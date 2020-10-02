@@ -13,6 +13,7 @@ from sklearn.datasets import load_iris
 import click
 from colorama import Fore, Style
 
+import sys
 import os
 
 
@@ -46,10 +47,11 @@ def new(package_name):
 
     # locating package template
     package_path = os.path.dirname(os.path.dirname(__file__))
+    script_path = os.path.join(os.getcwd(), package_name)
     template_path = os.path.join(package_path, "canai", "templates", "pred")
 
     # creating project
-    pf = ProjectFactory(package_name, template_path)
+    pf = ProjectFactory(package_name, script_path, template_path)
     pf.generate()
 
 
@@ -147,6 +149,11 @@ def train():
 
     # get project package name
     package_name = get_package_name()
+    project_root = get_generated_project_top_level()
+
+    # update path in case the command is not called from the project root
+    # https://stackoverflow.com/questions/4383571/importing-files-from-different-folder
+    sys.path.insert(1, project_root)
 
     # loading trainer code
     # https://stackoverflow.com/questions/547829/how-to-dynamically-load-a-python-class

@@ -60,6 +60,9 @@ or at least vizualize status
 
 - make the terminal engaging, gamification on project perf ?
 
+- provide access to generic canai package classes in project
+rails classes, not only rails command
+
 # install
 
 ``` bash
@@ -98,6 +101,8 @@ KANPAI_PACKAGE_SLUG            package_directory_name
 KANPAI_PACKAGE_NAME            package_name
 
 KANPAI_PACKAGE_CLASS           PackageName
+
+KANPAI_PACKAGE_ROOT            full project root path
 
 KANPAI_PACKAGE_DESCRIPTION     Package description
 

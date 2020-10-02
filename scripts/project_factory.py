@@ -12,8 +12,9 @@ class ProjectFactory():
     handles the creation of a project from a template
     """
 
-    def __init__(self, package_name, template_path):
+    def __init__(self, package_name, package_path, template_path):
         self.package_name = package_name
+        self.package_path = package_path
         self.template_path = template_path
 
     def generate(self):
@@ -173,9 +174,12 @@ class ProjectFactory():
 
         package_class = self.__get_package_class(self.package_name)
 
+        escaped_package_path = re.escape(self.package_path).replace("/", "\\/")
+
         replacements = dict(
             KANPAI_PACKAGE_NAME=self.package_name,
             KANPAI_PACKAGE_CLASS=package_class,
+            KANPAI_PACKAGE_ROOT=escaped_package_path,
             KANPAI_PACKAGE_DESCRIPTION='Package description',
             KANPAI_PACKAGE_SCRIPT='package_script_name')
 

@@ -1,9 +1,13 @@
 
 import pandas as pd
 
+import os
+
 
 def get_data():
-    df = pd.read_csv('data/data.csv')
+    project_root = "KANPAI_PACKAGE_ROOT"
+    data_path = os.path.join(project_root, "data", "data.csv")
+    df = pd.read_csv(data_path)
     return df
 
 
