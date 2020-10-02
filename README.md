@@ -63,6 +63,8 @@ or at least vizualize status
 - provide access to generic canai package classes in project
 rails classes, not only rails command
 
+- KANPAI_PACKAGE_ROOT allows to trun commands from anywhere in the project structure
+
 # install
 
 ``` bash
