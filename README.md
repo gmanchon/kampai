@@ -91,6 +91,8 @@ rails classes, not only rails command
 
 - use classes pattern : app, router, repo
 
+- externalize templates (or just alternative ones) in separate github repos + create repo registry (hard coded vs online service) ?
+
 # install
 
 ``` bash
