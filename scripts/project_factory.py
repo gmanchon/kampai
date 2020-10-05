@@ -177,11 +177,11 @@ class ProjectFactory():
         escaped_package_path = re.escape(self.package_path).replace("/", "\\/")
 
         replacements = dict(
-            KANPAI_PACKAGE_NAME=self.package_name,
-            KANPAI_PACKAGE_CLASS=package_class,
-            KANPAI_PACKAGE_ROOT=escaped_package_path,
-            KANPAI_PACKAGE_DESCRIPTION='Package description',
-            KANPAI_PACKAGE_SCRIPT='package_script_name')
+            KAMPAI_PACKAGE_NAME=self.package_name,
+            KAMPAI_PACKAGE_CLASS=package_class,
+            KAMPAI_PACKAGE_ROOT=escaped_package_path,
+            KAMPAI_PACKAGE_DESCRIPTION='Package description',
+            KAMPAI_PACKAGE_SCRIPT='package_script_name')
 
         for key, value in replacements.items():
 
@@ -210,7 +210,7 @@ class ProjectFactory():
         """
 
         dir_replacements = dict(
-            KANPAI_PACKAGE_SLUG=self.package_name)
+            KAMPAI_PACKAGE_SLUG=self.package_name)
 
         for key, value in dir_replacements.items():
 

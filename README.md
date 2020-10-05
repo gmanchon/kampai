@@ -15,11 +15,11 @@ allow user to select a base template:
 - back train: gaip
 
 allow user to create sklearn pipeline and transformers
-- kanpai g pipeline // with 2 steps for debug
-- kanpai g transformer col_a col_b --output col_c col_d
-- kanpai show pipeline sample 100 // show first 100 lines transformed
-- kanpai g model xgboost // add xgboost model
-- kanpai train
+- kampai g pipeline // with 2 steps for debug
+- kampai g transformer col_a col_b --output col_c col_d
+- kampai show pipeline sample 100 // show first 100 lines transformed
+- kampai g model xgboost // add xgboost model
+- kampai train
 
 => add all sklearn features as commands?
 
@@ -27,10 +27,10 @@ allow user to create sklearn pipeline and transformers
 
 => create github project / opt confirm
 
-- kanpai read a.csv analyse dataset
-- kanpai clean col_a --no-commit // remove null values
-- kanpai // standard scaler
-- kanpai // simple imputer
+- kampai read a.csv analyse dataset
+- kampai clean col_a --no-commit // remove null values
+- kampai // standard scaler
+- kampai // simple imputer
 
 - check invalid chars in project names (ie ds-project)
 
@@ -60,32 +60,32 @@ or at least vizualize status
 
 - make the terminal engaging, gamification on project perf ?
 
-- provide access to generic canai package classes in project
+- provide access to generic kampai package classes in project
 rails classes, not only rails command
 
-- KANPAI_PACKAGE_ROOT allows to trun commands from anywhere in the project structure
+- KAMPAI_PACKAGE_ROOT allows to trun commands from anywhere in the project structure
 
-- no need to install the generated package in order to use the kanpai scripts
+- no need to install the generated package in order to use the kampai scripts
 
 - refacto : clarify the context the functions are supposed to be used in
 (project generation by script, inside of project by script, inside of project by project)
 
-- list created files at each step (kanpai new, kanpai generate, etc)
+- list created files at each step (kampai new, kampai generate, etc)
 
 - activate the virtual env of the project when running a command
 
 - clone templates from url / git version
 
 - create framework classes
-:- KanpaiMLFlow
-:- KanpaiTrainer
+:- KampaiMLFlow
+:- KampaiTrainer
 :- create application.rb conf file for mlflow server source
 
 - add tests
 - validate on windows
 
 - DE week students learn to create a template
-- kanpai allows to juggle with the templates and shared code and prod
+- kampai allows to juggle with the templates and shared code and prod
 
 - >>> use MVC pattern for command line, note for data repo
 
@@ -100,14 +100,14 @@ pip install .
 # usage
 
 ``` bash
-kanpai new PROJECT_NAME       # creates a new data science project
+kampai new PROJECT_NAME       # creates a new data science project
 
-kanpai fetch                  # retrieves csv data from url and stores it locally
+kampai fetch                  # retrieves csv data from url and stores it locally
                               # defaults to 1000 of taxifare
 
-kanpai head                   # displays head of fetched data
+kampai head                   # displays head of fetched data
 
-kanpai train                  # trains model
+kampai train                  # trains model
 ```
 
 # development
@@ -122,16 +122,16 @@ pip install -e .
 
 ## directories
 
-KANPAI_PACKAGE_SLUG            package_directory_name
+KAMPAI_PACKAGE_SLUG            package_directory_name
 
 ## files
 
-KANPAI_PACKAGE_NAME            package_name
+KAMPAI_PACKAGE_NAME            package_name
 
-KANPAI_PACKAGE_CLASS           PackageName
+KAMPAI_PACKAGE_CLASS           PackageName
 
-KANPAI_PACKAGE_ROOT            full project root path
+KAMPAI_PACKAGE_ROOT            full project root path
 
-KANPAI_PACKAGE_DESCRIPTION     Package description
+KAMPAI_PACKAGE_DESCRIPTION     Package description
 
-KANPAI_PACKAGE_SCRIPT          package_script_name
+KAMPAI_PACKAGE_SCRIPT          package_script_name

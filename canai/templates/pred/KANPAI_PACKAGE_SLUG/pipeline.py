@@ -6,7 +6,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.pipeline import Pipeline
 
 
-class KANPAI_PACKAGE_CLASSPipeline():
+class KAMPAI_PACKAGE_CLASSPipeline():
 
     def create_pipeline(self):
 

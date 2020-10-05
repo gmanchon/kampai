@@ -3,14 +3,14 @@ from colorama import Fore, Style
 
 import os
 
-COMMIT_SIGNATURE = "kanpai 🎉 🍰"  # identifies a kanpai project
+COMMIT_SIGNATURE = "kampai 🎉 🍰"  # identifies a kampai project
 
 
 def is_cwd_within_generated_project(print_error_if_not_within=False):
     """
     checks whether the current working directory is a git repo
-    that was generated using kanpai by verifying that the first commit
-    contains the kanpai commit signature
+    that was generated using kampai by verifying that the first commit
+    contains the kampai commit signature
     """
 
     # retrieving first commit of current working directory
@@ -23,11 +23,11 @@ def is_cwd_within_generated_project(print_error_if_not_within=False):
 
     git_first_commit = os.popen(git_log_cmd).read()
 
-    # checking whether first commit was performed by kanpai
+    # checking whether first commit was performed by kampai
     if COMMIT_SIGNATURE not in git_first_commit:
         if print_error_if_not_within:
             print(Fore.RED + "This command needs to be run "
-                  "within a kanpai generated project... 😅"
+                  "within a kampai generated project... 😅"
                   + Style.RESET_ALL)
 
         return False
@@ -37,7 +37,7 @@ def is_cwd_within_generated_project(print_error_if_not_within=False):
 
 def get_generated_project_top_level():
     """
-    retrieves the top level of the generated kanpai project
+    retrieves the top level of the generated kampai project
     which corresponds to the top level of the git repository
     """
 

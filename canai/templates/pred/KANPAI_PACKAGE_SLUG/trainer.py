@@ -1,7 +1,7 @@
 
-from KANPAI_PACKAGE_NAME.data import get_data, clean_df
-from KANPAI_PACKAGE_NAME.pipeline import KANPAI_PACKAGE_CLASSPipeline
-from KANPAI_PACKAGE_NAME.utils import compute_rmse
+from KAMPAI_PACKAGE_NAME.data import get_data, clean_df
+from KAMPAI_PACKAGE_NAME.pipeline import KAMPAI_PACKAGE_CLASSPipeline
+from KAMPAI_PACKAGE_NAME.utils import compute_rmse
 
 from sklearn.model_selection import train_test_split
 
@@ -31,7 +31,7 @@ class Trainer():
                                                             random_state=42)
 
         # create pipeline
-        self.model = KANPAI_PACKAGE_CLASSPipeline().create_pipeline()
+        self.model = KAMPAI_PACKAGE_CLASSPipeline().create_pipeline()
 
         # train
         self.model.fit(X_train, y_train)

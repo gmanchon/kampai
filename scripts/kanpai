@@ -24,9 +24,9 @@ def get_data_path():
 
 
 def assert_within_project():
-    is_kanpai = is_cwd_within_generated_project(True)
+    is_kampai = is_cwd_within_generated_project(True)
 
-    if not is_kanpai:
+    if not is_kampai:
         exit(1)
 
 
@@ -48,7 +48,7 @@ def new(package_name):
     # locating package template
     package_path = os.path.dirname(os.path.dirname(__file__))
     script_path = os.path.join(os.getcwd(), package_name)
-    template_path = os.path.join(package_path, "canai", "templates", "pred")
+    template_path = os.path.join(package_path, "kampai", "templates", "pred")
 
     # creating project
     pf = ProjectFactory(package_name, script_path, template_path)
