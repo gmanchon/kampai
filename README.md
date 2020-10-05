@@ -76,6 +76,21 @@ rails classes, not only rails command
 
 - clone templates from url / git version
 
+- create framework classes
+:- KanpaiMLFlow
+:- KanpaiTrainer
+:- create application.rb conf file for mlflow server source
+
+- add tests
+- validate on windows
+
+- DE week students learn to create a template
+- kanpai allows to juggle with the templates and shared code and prod
+
+- >>> use MVC pattern for command line, note for data repo
+
+- use classes pattern : app, router, repo
+
 # install
 
 ``` bash
