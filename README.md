@@ -93,6 +93,8 @@ rails classes, not only rails command
 
 - externalize templates (or just alternative ones) in separate github repos + create repo registry (hard coded vs online service) ?
 
+- correct kampai new wagon-data-template : prevent projets names with - in `__assess_package_name`
+
 # install
 
 ``` bash
