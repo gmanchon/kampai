@@ -97,6 +97,8 @@ rails classes, not only rails command
 
 - have features for the 80% of the time spent by the data scientist on data preparation
 
+- decorelate templates from project (use separate repos)
+
 # install
 
 ``` bash
