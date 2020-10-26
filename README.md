@@ -95,6 +95,8 @@ rails classes, not only rails command
 
 - correct kampai new wagon-data-template : prevent projets names with - in `__assess_package_name`
 
+- have features for the 80% of the time spent by the data scientist on data preparation
+
 # install
 
 ``` bash
