@@ -99,6 +99,8 @@ rails classes, not only rails command
 
 - decorelate templates from project (use separate repos)
 
+- bug when project is named abc
+
 # install
 
 ``` bash
