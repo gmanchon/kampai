@@ -137,7 +137,7 @@ def head(nrows):
 #           + Style.RESET_ALL)
 
 
-@greet.command(help="tains model")
+@greet.command(help="trains model")
 def train():
     """
     trains models
