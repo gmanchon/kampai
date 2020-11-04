@@ -38,7 +38,7 @@ def greet():
     pass
 
 
-@greet.command(help="creates a data science project boilerplate")
+@greet.command(help="create a data science project boilerplate")
 @click.argument("package_name")
 def new(package_name):
     """
@@ -55,7 +55,7 @@ def new(package_name):
     pf.generate()
 
 
-@greet.command(help="fetches data from a csv ressource, "
+@greet.command(help="fetch data from a csv ressource, "
                "defaults to the taxifare csv")
 @click.argument("data", default="taxifare")
 @click.option("--nrows", "-n", "nrows", default=1_000,
@@ -97,7 +97,7 @@ def fetch(data, nrows):
           + Style.RESET_ALL)
 
 
-@greet.command(help="shows fetched data head")
+@greet.command(help="show fetched data head")
 @click.option("--nrows", "-n", "nrows", default=5,
               help="number of rows to retrieve, -1 to retrieve all")
 def head(nrows):
@@ -113,7 +113,7 @@ def head(nrows):
     print(df.head(nrows))
 
 
-# @greet.command(help="installs package")
+# @greet.command(help="install package")
 # def install():
 #     """
 #     installs package
@@ -137,7 +137,7 @@ def head(nrows):
 #           + Style.RESET_ALL)
 
 
-@greet.command(help="trains model")
+@greet.command(help="train model")
 def train():
     """
     trains models
