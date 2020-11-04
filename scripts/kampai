@@ -40,7 +40,8 @@ def greet():
 
 @greet.command(help="create a data science project boilerplate")
 @click.argument("package_name")
-def new(package_name):
+@click.argument("source", default="default")
+def new(package_name, source):
     """
     fetches data csv ressource url and stores it locally for further processing
     """
@@ -50,9 +51,18 @@ def new(package_name):
     script_path = os.path.join(os.getcwd(), package_name)
     template_path = os.path.join(package_path, "kampai", "templates", "pred")
 
-    # creating project
-    pf = ProjectFactory(package_name, script_path, template_path)
-    pf.generate()
+    # checking source parameter
+    if source == "default":
+
+        # creating project using kampai default package
+        pf = ProjectFactory(package_name, script_path, template_path)
+        pf.generate()
+
+    else:
+
+        # creating project
+        # pf = ProjectFactory(package_name, script_path, template_path)
+        # pf.generate()
 
 
 @greet.command(help="fetch data from a csv ressource, "
