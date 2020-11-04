@@ -70,7 +70,7 @@ def new(package_name, source):
             # pf = ProjectFactory(package_name, script_path, template_path)
             # pf.generate()
 
-            pass
+            pc.remove_temporary_directory()
 
 
 @greet.command(help="fetch data from a csv ressource, "

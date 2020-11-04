@@ -15,14 +15,19 @@ class ProjectClone():
     def __init__(self, source):
 
         # getting temporary directory name
-        tmp_dir = self.__generate_tmp_directory_name()
+        self.tmp_dir = self.__generate_tmp_directory_name()
 
         # cloning source
-        self.__clone_repository(source, tmp_dir)
+        self.__clone_repository(source, self.tmp_dir)
 
     def is_valid(self):
 
         return True
+
+    def remove_temporary_directory(self):
+
+        # remove temporary directory
+        self.__remove_temporary_directory(self.tmp_dir)
 
     def __generate_tmp_directory_name(self):
         """
@@ -72,6 +77,11 @@ class ProjectClone():
                   % source)
 
             # remove temporary directory if created
-            remove_tmp_cmd = "rm -Rf %s" % tmp_dir
+            self.__remove_temporary_directory(tmp_dir)
 
-            os.system(remove_tmp_cmd)
+    def __remove_temporary_directory(self, dir_path):
+
+        # remove directory
+        remove_tmp_cmd = "rm -Rf %s" % dir_path
+
+        os.system(remove_tmp_cmd)
