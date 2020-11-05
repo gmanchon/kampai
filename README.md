@@ -132,7 +132,7 @@ pip install -e .
 
 ## directories
 
-KAMPAI_PACKAGE_SLUG            package_directory_name
+KAMPAI_PACKAGE_NAME            package_directory_name
 
 ## files
 

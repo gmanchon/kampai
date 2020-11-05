@@ -46,3 +46,20 @@ class Trainer():
         joblib.dump(self.model, 'model.joblib')
 
         return rmse
+
+
+if __name__ == '__main__':
+
+    # create trainer
+    trainer = Trainer()
+
+    print("Training model...")
+
+    # running trainer
+    rmse = trainer.train()
+
+    from colorama import Fore, Style
+
+    print(Fore.GREEN + "Model trained, rmse: %s 👍"
+          % rmse
+          + Style.RESET_ALL)

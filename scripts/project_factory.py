@@ -54,11 +54,16 @@ class ProjectFactory():
         # replace tokens in all files
         self.__replace_package_tokens()
 
-        # replace package slug
-        self.__replace_package_slug()
+        # TODO not performing any replacements, need to handle replacements
+        # in a kampai template project coded as a regular project
+        # without tokens (issues with imports, etc)
+        if self.package_slug is None:
 
-        # init git repo
-        self.__commit_git_repo()
+            # replace package slug
+            self.__replace_package_slug()
+
+            # init git repo
+            self.__commit_git_repo()
 
         print(Fore.GREEN + "\nProject %s successfully created! 🎉 🍰"
               % self.package_name)
@@ -239,7 +244,7 @@ class ProjectFactory():
 
             # use default directory name
             dir_replacements = dict(
-                KAMPAI_PACKAGE_SLUG=self.package_name)
+                KAMPAI_PACKAGE_NAME=self.package_name)
         else:
 
             # use provided directory name
