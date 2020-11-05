@@ -14,7 +14,9 @@ class ProjectFactory():
 
     def __init__(self, package_name, package_path, template_path,
                  replacements=None,
-                 package_slug=None):
+                 package_slug=None,
+                 template_remote_url=None,
+                 template_commit_hash=None):
 
         self.package_name = package_name
         self.package_path = package_path
@@ -22,6 +24,9 @@ class ProjectFactory():
 
         self.replacements = replacements
         self.package_slug = package_slug
+
+        self.template_remote_url = template_remote_url
+        self.template_commit_hash = template_commit_hash
 
     def generate(self):
         """
@@ -155,11 +160,18 @@ class ProjectFactory():
         creates git repo and adds commit containing commit signature
         """
 
+        source_template = ""
+
+        if self.template_remote_url is not None:
+
+            source_template = "from %s (%s) " \
+                % (self.template_remote_url, self.template_commit_hash)
+
         git_init_cmd = "cd %s " \
                        " && git init &>/dev/null " \
                        " && git add . " \
-                       " && git commit -m 'initial commit by %s' &>/dev/null" \
-                       % (self.package_name, COMMIT_SIGNATURE)
+                       " && git commit -m 'initial commit %sby %s' &>/dev/null" \
+                       % (self.package_name, source_template, COMMIT_SIGNATURE)
 
         git_init_code = os.system(git_init_cmd)
 

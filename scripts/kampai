@@ -75,8 +75,6 @@ def new(package_name, source):
         clone_name, commit_hash, remote_url = project_clone.get_clone_params()
         template_path = os.path.join(os.getcwd(), clone_name)
 
-        # TODO log commit_hash, remote_url in new repo
-
         print(Fore.GREEN + "\nCreating project... 🦜"
               + Style.RESET_ALL
               + "\nFrom %s to %s"
@@ -104,7 +102,9 @@ def new(package_name, source):
         # TODO package slug must be a valid dir name
 
         pf = ProjectFactory(package_name, project_path, template_path,
-                            replacements={}, package_slug=package_slug)
+                            replacements={}, package_slug=package_slug,
+                            template_remote_url=remote_url,
+                            template_commit_hash=commit_hash)
         pf.generate()
 
         # remove temporary directory
