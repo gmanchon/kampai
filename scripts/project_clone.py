@@ -21,8 +21,7 @@ class ProjectClone():
         self.__clone_repository(source, self.tmp_dir)
 
         # removing existing repo
-        self.commit_hash, self.remote_url = \
-            self._remove_cloned_directory_git_repo(self.tmp_dir)
+        self._remove_cloned_directory_git_repo(self.tmp_dir)
 
     def is_valid(self):
 
@@ -109,20 +108,20 @@ class ProjectClone():
             % tmp_dir \
             + "&& git rev-parse master"
 
-        commit_hash = os.popen(git_latest_commit_hash_cmd).read().strip()
+        self.commit_hash = os.popen(git_latest_commit_hash_cmd).read().strip()
 
         print("Clone hash: %s"
-              % commit_hash)
+              % self.commit_hash)
 
         # list remotes
         git_remotes_cmd = "cd %s " \
             % tmp_dir \
             + "&& git config --get remote.origin.url"
 
-        remote_url = os.popen(git_remotes_cmd).read().strip()
+        self.remote_url = os.popen(git_remotes_cmd).read().strip()
 
         print("Clone source: %s"
-              % remote_url)
+              % self.remote_url)
 
         # remove git directory
         remove_git_cmd = "cd %s " \
@@ -130,5 +129,3 @@ class ProjectClone():
             + "&& rm -Rf .git"
 
         os.system(remove_git_cmd)
-
-        return (commit_hash, remote_url)
