@@ -47,30 +47,54 @@ def new(package_name, source):
     fetches data csv ressource url and stores it locally for further processing
     """
 
-    # locating package template
-    package_path = os.path.dirname(os.path.dirname(__file__))
-    script_path = os.path.join(os.getcwd(), package_name)
-    template_path = os.path.join(package_path, "kampai", "templates", "pred")
+    # building destination path
+    project_path = os.path.join(os.getcwd(), package_name)
 
     # checking source parameter
     if source == "default":
 
+        # locating package template (source path)
+        package_path = os.path.dirname(os.path.dirname(__file__))
+        template_path = os.path.join(package_path, "kampai", "templates", "pred")
+
         # creating project using kampai default package
-        pf = ProjectFactory(package_name, script_path, template_path)
+        pf = ProjectFactory(package_name, project_path, template_path)
         pf.generate()
 
     else:
 
         # cloning source
-        pc = ProjectClone(source)
+        project_clone = ProjectClone(source)
 
         # creating project
-        if pc.is_valid:
+        if not project_clone.is_valid:
 
-            # pf = ProjectFactory(package_name, script_path, template_path)
-            # pf.generate()
+            return
 
-            pc.remove_temporary_directory()
+        # building source path
+        clone_name, commit_hash, remote_url = project_clone.get_clone_params()
+        template_path = os.path.join(os.getcwd(), clone_name)
+
+        # TODO log commit_hash, remote_url in new repo
+
+        print(Fore.GREEN + "\nCreating project... 🦜"
+              + Style.RESET_ALL
+              + "\nFrom %s to %s"
+              % (clone_name, project_path))
+
+        # TODO replace KAMPAI_ placeholders / replacements
+
+        # TODO handle package slug (in template yaml file ?)
+        package_slug = "project"
+
+        # TODO package slug must be a valid dir name
+
+        pf = ProjectFactory(package_name, project_path, template_path,
+                            replacements={}, package_slug=package_slug)
+        pf.generate()
+
+        # remove temporary directory
+        project_clone.remove_temporary_directory()
 
 
 @greet.command(help="fetch data from a csv ressource, "

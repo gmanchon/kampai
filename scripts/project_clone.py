@@ -20,9 +20,18 @@ class ProjectClone():
         # cloning source
         self.__clone_repository(source, self.tmp_dir)
 
+        # removing existing repo
+        self.commit_hash, self.remote_url = \
+            self._remove_cloned_directory_git_repo(self.tmp_dir)
+
     def is_valid(self):
 
         return True
+
+    def get_clone_params(self):
+
+        # return cloned directory params
+        return (self.tmp_dir, self.commit_hash, self.remote_url)
 
     def remove_temporary_directory(self):
 
@@ -55,9 +64,9 @@ class ProjectClone():
         """
 
         # cloning repository
-        print(Fore.GREEN + "\nCloning repository %s... 🚀"
-              % source
-              + Style.RESET_ALL)
+        print(Fore.GREEN + "\nCloning repository... 🚀"
+              + Style.RESET_ALL
+              + "\nFrom: %s to %s" % (source, tmp_dir))
 
         # --progress allows to retrieve all of the output
         git_clone_cmd = f"git clone --progress {source} {tmp_dir} 2>&1"
@@ -85,3 +94,41 @@ class ProjectClone():
         remove_tmp_cmd = "rm -Rf %s" % dir_path
 
         os.system(remove_tmp_cmd)
+
+    def _remove_cloned_directory_git_repo(self, tmp_dir):
+        """
+        remove .git directory in cloned directory
+        in order to start from clean history
+        """
+
+        print(Fore.GREEN + "\nCleaning repository... 🧹"
+              + Style.RESET_ALL)
+
+        # retrieve latest commit hash
+        git_latest_commit_hash_cmd = "cd %s " \
+            % tmp_dir \
+            + "&& git rev-parse master"
+
+        commit_hash = os.popen(git_latest_commit_hash_cmd).read().strip()
+
+        print("Clone hash: %s"
+              % commit_hash)
+
+        # list remotes
+        git_remotes_cmd = "cd %s " \
+            % tmp_dir \
+            + "&& git config --get remote.origin.url"
+
+        remote_url = os.popen(git_remotes_cmd).read().strip()
+
+        print("Clone source: %s"
+              % remote_url)
+
+        # remove git directory
+        remove_git_cmd = "cd %s " \
+            % tmp_dir \
+            + "&& rm -Rf .git"
+
+        os.system(remove_git_cmd)
+
+        return (commit_hash, remote_url)

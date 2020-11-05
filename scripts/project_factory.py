@@ -12,10 +12,16 @@ class ProjectFactory():
     handles the creation of a project from a template
     """
 
-    def __init__(self, package_name, package_path, template_path):
+    def __init__(self, package_name, package_path, template_path,
+                 replacements=None,
+                 package_slug=None):
+
         self.package_name = package_name
         self.package_path = package_path
         self.template_path = template_path
+
+        self.replacements = replacements
+        self.package_slug = package_slug
 
     def generate(self):
         """
@@ -176,12 +182,20 @@ class ProjectFactory():
 
         escaped_package_path = re.escape(self.package_path).replace("/", "\\/")
 
-        replacements = dict(
-            KAMPAI_PACKAGE_NAME=self.package_name,
-            KAMPAI_PACKAGE_CLASS=package_class,
-            KAMPAI_PACKAGE_ROOT=escaped_package_path,
-            KAMPAI_PACKAGE_DESCRIPTION='Package description',
-            KAMPAI_PACKAGE_SCRIPT='package_script_name')
+        if self.replacements is None:
+
+            # use default replacements
+            replacements = dict(
+                KAMPAI_PACKAGE_NAME=self.package_name,
+                KAMPAI_PACKAGE_CLASS=package_class,
+                KAMPAI_PACKAGE_ROOT=escaped_package_path,
+                KAMPAI_PACKAGE_DESCRIPTION='Package description',
+                KAMPAI_PACKAGE_SCRIPT='package_script_name')
+
+        else:
+
+            # use provided replacements
+            replacements = self.replacements
 
         for key, value in replacements.items():
 
@@ -209,8 +223,16 @@ class ProjectFactory():
         renames template package folder according to project name
         """
 
-        dir_replacements = dict(
-            KAMPAI_PACKAGE_SLUG=self.package_name)
+        if self.package_slug is None:
+
+            # use default directory name
+            dir_replacements = dict(
+                KAMPAI_PACKAGE_SLUG=self.package_name)
+        else:
+
+            # use provided directory name
+            dir_replacements = {
+                self.package_slug: self.package_name}
 
         for key, value in dir_replacements.items():
 
