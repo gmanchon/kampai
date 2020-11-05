@@ -6,7 +6,13 @@ boilerplate code
 # usage
 
 ``` bash
-kampai fetch  # retrieve test data
+kampai fetch        # retrieve test data
+kampai head         # show head of data
+kampai train        # train
+```
 
-python -m KAMPAI_PACKAGE_NAME.trainer  # train model
+## train
+
+``` bash
+python -m KAMPAI_PACKAGE_NAME.trainer
 ```
