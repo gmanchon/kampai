@@ -84,8 +84,22 @@ def new(package_name, source):
 
         # TODO replace KAMPAI_ placeholders / replacements
 
-        # TODO handle package slug (in template yaml file ?)
-        package_slug = "project"
+        # TODO handle forbidden project names in template using curl
+
+        package_slug = project_clone.get_template_package_slug(template_path)
+
+        # check if kampai template is valid
+        if package_slug is None:
+
+            print(Fore.RED + "\n⚠️  Provided remote is not a kampai "
+                  + "repository: %s 😢"
+                  % source
+                  + Style.RESET_ALL)
+
+            # remove temporary directory
+            project_clone.remove_temporary_directory()
+
+            return
 
         # TODO package slug must be a valid dir name
 

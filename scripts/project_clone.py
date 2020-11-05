@@ -3,6 +3,7 @@ import uuid
 
 from colorama import Fore, Style
 
+import yaml
 import re
 import os
 
@@ -129,3 +130,48 @@ class ProjectClone():
             + "&& rm -Rf .git"
 
         os.system(remove_git_cmd)
+
+    def get_template_package_slug(self, template_path):
+        """
+        retrieves package slug from template kampai conf file
+        """
+
+        # get template package slug
+        template_kampai_conf_name = "kampai.yaml"
+        template_kampai_conf_path = os.path.join(template_path,
+                                                 template_kampai_conf_name)
+
+        # checking whether remote is a kampai template TODO use curl
+        if not os.path.isfile(template_kampai_conf_path):
+
+            print(Fore.RED + "\n⚠️  Cannot find kampai template conf file 😢"
+                  + Style.RESET_ALL
+                  + "\nIt is only possible to use kampai templates..."
+                  + "\nMake sure the repository contains a %s file"
+                  % template_kampai_conf_name)
+
+            return None
+
+        # load template kampai conf
+        with open(template_kampai_conf_path, "r") as file:
+            template_config = yaml.safe_load(file)
+
+        # checking conf file
+        kampai_tpl_template = "template"
+        kampai_tpl_slug = "package_slug"
+
+        if kampai_tpl_template not in template_config \
+                or kampai_tpl_slug not in template_config[kampai_tpl_template]:
+
+            print(Fore.RED + "\n⚠️  Invalid remote %s conf file 😢"
+                  % template_kampai_conf_name
+                  + Style.RESET_ALL
+                  + "\nMake sure the conf file contains %s and sub %s conf"
+                  % (kampai_tpl_template, kampai_tpl_slug))
+
+            return None
+
+        # retrieve package slug from template kampai conf file
+        package_slug = template_config[kampai_tpl_template][kampai_tpl_slug]
+
+        return package_slug

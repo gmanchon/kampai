@@ -55,7 +55,7 @@ class ProjectFactory():
         # init git repo
         self.__commit_git_repo()
 
-        print(Fore.GREEN + "Project %s successfully created! 🎉 🍰"
+        print(Fore.GREEN + "\nProject %s successfully created! 🎉 🍰"
               % self.package_name)
 
     def __assess_package_name(self):
