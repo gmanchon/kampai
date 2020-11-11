@@ -66,7 +66,8 @@ class ProjectFactory():
             self.__commit_git_repo()
 
         print(Fore.GREEN + "\nProject %s successfully created! 🎉 🍰"
-              % self.package_name)
+              % self.package_name
+              + Style.RESET_ALL)
 
     def generate_gist(self):
 
@@ -78,6 +79,9 @@ class ProjectFactory():
 
         # replace package slug
         self.__replace_package_slug()
+
+        print(Fore.GREEN + "\nGist successfully generated! 🎉 🥂"
+              + Style.RESET_ALL)
 
     def __assess_package_name(self):
         is_valid = bool(re.match(r"^[a-zA-Z]\w*", self.package_name))
@@ -165,11 +169,30 @@ class ProjectFactory():
         if contents_only:
             contents = "/."
 
+        escaped_package_path = re \
+            .escape(self.package_path + contents) \
+            .replace("/", "\\/") \
+            .replace(".", "\\.")
+
+        print(Fore.GREEN + "\nGenerate files:"
+              + Style.RESET_ALL)
+
         # copy directory (or its content) to destination
-        copy_cmd = "cp -R %s%s %s" \
+        # cp -v activates verbose mode
+        # tail -n +2 removes first line from file (copied directory name)
+        # sed replaces verbose output by list of copied files
+        # echo "/source/./setup.py -> /dest/./setup.py
+        # /source/./scripts -> /dest/./scripts" \
+        # | sed "s/\(^.*\.\/\)/\.\//"
+        copy_cmd = "cp -Rv %s%s %s " \
+            " > remove.me " \
+            " && tail -n +2 remove.me " \
+            " | sed \"s/\\(^.*%s\\)//\" " \
+            " && rm remove.me" \
             % (self.template_path,
                contents,
-               self.package_path)
+               self.package_path,
+               escaped_package_path)
 
         copy_code = os.system(copy_cmd)
 
