@@ -247,7 +247,7 @@ class ProjectFactory():
         for key, value in replacements.items():
 
             # find . -type f recursively finds all files (only files)
-            # grep filters files matching the corresponding pattern
+            # -name only searches through files matching given pattern
             # xargs converts the list of files into parameters for sed
             # sed -i '' 's/a/b/g' replaces the pattern a by b in the files
             replace_cmd = "cd %s " \
