@@ -111,6 +111,18 @@ def new(package_name, source):
         project_clone.remove_temporary_directory()
 
 
+@greet.command(help="generate gist code boilerplate")
+@click.argument("gist", type=click.Choice(
+    ["make", "script", "test", "ci"],
+    case_sensitive=False))
+def gen(gist):
+    """
+    generates gist code boilerplate in project
+    """
+
+    print(gist)
+
+
 @greet.command(help="fetch data from a csv ressource, "
                "defaults to the taxifare csv")
 @click.argument("data", default="taxifare")
