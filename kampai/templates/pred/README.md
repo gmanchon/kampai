@@ -1,18 +1,21 @@
 
 # about
 
-boilerplate code
+[kampai](https://github.com/gmanchon/kampai) generated boilerplate code
 
 # usage
 
+## project generation
+
 ``` bash
-kampai fetch        # retrieve test data
-kampai head         # show head of data
-kampai train        # train
+kampai gen make               # generate Makefile
+kampai gen test               # generate tests
+kampai gen script             # generate script boilerplate
+kampai gen ci                 # generate github ci conf
 ```
 
-## train
+## model training
 
 ``` bash
-python -m KAMPAI_PACKAGE_NAME.trainer
+python -m KAMPAI_PACKAGE_NAME.app
 ```
