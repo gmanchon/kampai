@@ -56,6 +56,14 @@ def get_generated_project_top_level():
     return root_path
 
 
+def get_install_path():
+    """
+    retrieves package install path
+    """
+
+    return os.path.dirname(__file__)
+
+
 def get_package_name():
     """
     retrieves project package name from setup.py

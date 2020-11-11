@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from scripts.project_clone import ProjectClone
-from scripts.project_factory import ProjectFactory
-from scripts.project_context import (is_cwd_within_generated_project,
-                                     get_generated_project_top_level,
-                                     get_package_name)
+from kampai.project_clone import ProjectClone
+from kampai.project_factory import ProjectFactory
+from kampai.project_context import (is_cwd_within_generated_project,
+                                    get_generated_project_top_level,
+                                    get_install_path,
+                                    get_package_name)
 
 import numpy as np
 import pandas as pd
@@ -54,8 +55,8 @@ def new(package_name, source):
     if source == "default":
 
         # locating package template (source path)
-        package_path = os.path.dirname(os.path.dirname(__file__))
-        template_path = os.path.join(package_path, "kampai", "templates", "pred")
+        package_path = get_install_path()
+        template_path = os.path.join(package_path, "templates", "pred")
 
         # creating project using kampai default package
         pf = ProjectFactory(package_name, project_path, template_path)
@@ -127,8 +128,8 @@ def gen(gist):
     project_root = get_generated_project_top_level()
 
     # locating gist code boilerplate (source path)
-    package_path = os.path.dirname(os.path.dirname(__file__))
-    template_path = os.path.join(package_path, "kampai", "gists", gist)
+    package_path = get_install_path()
+    template_path = os.path.join(package_path, "gists", gist)
 
     # creating gist code boilerplate
     pf = ProjectFactory(package_name, project_root, template_path)
