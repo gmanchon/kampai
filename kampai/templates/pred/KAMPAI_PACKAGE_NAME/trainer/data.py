@@ -1,7 +1,8 @@
-
-import pandas as pd
+# pylint: disable=missing-docstring, invalid-name
 
 import os
+
+import pandas as pd
 
 
 def get_data():

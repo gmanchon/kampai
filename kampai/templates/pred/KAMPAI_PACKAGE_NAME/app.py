@@ -1,7 +1,9 @@
-
-from KAMPAI_PACKAGE_NAME.trainer.trainer import Trainer
+# pylint: disable=missing-docstring
+# pylint: disable=too-few-public-methods
 
 from colorama import Fore, Style
+
+from KAMPAI_PACKAGE_NAME.trainer.trainer import Trainer
 
 
 class App:

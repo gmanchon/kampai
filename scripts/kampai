@@ -135,11 +135,11 @@ def gen(gist):
     pf.generate_gist()
 
 
-@greet.command(help="fetch data from a csv ressource, "
-               "defaults to the taxifare csv")
-@click.argument("data", default="taxifare")
-@click.option("--nrows", "-n", "nrows", default=1_000,
-              help="number of rows to retrieve, -1 to retrieve all")
+# @greet.command(help="fetch data from a csv ressource, "
+#                "defaults to the taxifare csv")
+# @click.argument("data", default="taxifare")
+# @click.option("--nrows", "-n", "nrows", default=1_000,
+#               help="number of rows to retrieve, -1 to retrieve all")
 def fetch(data, nrows):
     """
     fetches data csv ressource url and stores it locally for further processing
@@ -177,9 +177,9 @@ def fetch(data, nrows):
           + Style.RESET_ALL)
 
 
-@greet.command(help="show fetched data head")
-@click.option("--nrows", "-n", "nrows", default=5,
-              help="number of rows to retrieve, -1 to retrieve all")
+# @greet.command(help="show fetched data head")
+# @click.option("--nrows", "-n", "nrows", default=5,
+#               help="number of rows to retrieve, -1 to retrieve all")
 def head(nrows):
     """
     shows head of fetched dataset
@@ -217,7 +217,7 @@ def head(nrows):
 #           + Style.RESET_ALL)
 
 
-@greet.command(help="train model")
+# @greet.command(help="train model")
 def train():
     """
     trains models

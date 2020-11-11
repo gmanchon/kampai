@@ -1,3 +1,5 @@
+# pylint: disable=missing-docstring
+# pylint: disable=too-few-public-methods, no-self-use
 
 from sklearn.preprocessing import StandardScaler
 

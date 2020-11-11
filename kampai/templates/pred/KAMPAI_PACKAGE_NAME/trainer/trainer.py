@@ -1,11 +1,13 @@
+# pylint: disable=missing-docstring, invalid-name
+# pylint: disable=too-few-public-methods, no-self-use
+
+import joblib
+
+from sklearn.model_selection import train_test_split
 
 from KAMPAI_PACKAGE_NAME.trainer.data import get_data, clean_df
 from KAMPAI_PACKAGE_NAME.trainer.pipeline import KAMPAI_PACKAGE_CLASSPipeline
 from KAMPAI_PACKAGE_NAME.trainer.metrics import compute_rmse
-
-from sklearn.model_selection import train_test_split
-
-import joblib
 
 
 class Trainer():
@@ -31,18 +33,18 @@ class Trainer():
                                                             random_state=42)
 
         # create pipeline
-        self.model = KAMPAI_PACKAGE_CLASSPipeline().create_pipeline()
+        model = KAMPAI_PACKAGE_CLASSPipeline().create_pipeline()
 
         # train
-        self.model.fit(X_train, y_train)
+        model.fit(X_train, y_train)
 
         # predict
-        y_pred = self.model.predict(X_test)
+        y_pred = model.predict(X_test)
 
         # perf
         rmse = compute_rmse(y_pred, y_test)
 
         # save model
-        joblib.dump(self.model, 'model.joblib')
+        joblib.dump(model, 'model.joblib')
 
         return rmse
