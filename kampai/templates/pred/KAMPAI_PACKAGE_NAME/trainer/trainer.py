@@ -25,6 +25,7 @@ class Trainer():
         X = df[cols]
         y = df["fare_amount"]
 
+        # holdout
         X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                             test_size=0.1,
                                                             random_state=42)
