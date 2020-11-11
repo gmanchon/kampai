@@ -1,7 +1,7 @@
 
-from KAMPAI_PACKAGE_NAME.data import get_data, clean_df
-from KAMPAI_PACKAGE_NAME.pipeline import KAMPAI_PACKAGE_CLASSPipeline
-from KAMPAI_PACKAGE_NAME.utils import compute_rmse
+from KAMPAI_PACKAGE_NAME.trainer.data import get_data, clean_df
+from KAMPAI_PACKAGE_NAME.trainer.pipeline import KAMPAI_PACKAGE_CLASSPipeline
+from KAMPAI_PACKAGE_NAME.trainer.metrics import compute_rmse
 
 from sklearn.model_selection import train_test_split
 
@@ -17,14 +17,13 @@ class Trainer():
         df = clean_df(df)
 
         # get X and y
-        # TODO: not generic
         cols = ["pickup_latitude",
                 "pickup_longitude",
                 "dropoff_latitude",
                 "dropoff_longitude"]
 
-        y = df["fare_amount"]
         X = df[cols]
+        y = df["fare_amount"]
 
         X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                             test_size=0.1,
@@ -46,20 +45,3 @@ class Trainer():
         joblib.dump(self.model, 'model.joblib')
 
         return rmse
-
-
-if __name__ == '__main__':
-
-    # create trainer
-    trainer = Trainer()
-
-    print("Training model...")
-
-    # running trainer
-    rmse = trainer.train()
-
-    from colorama import Fore, Style
-
-    print(Fore.GREEN + "Model trained, rmse: %s 👍"
-          % rmse
-          + Style.RESET_ALL)
