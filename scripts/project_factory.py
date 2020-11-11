@@ -215,6 +215,16 @@ class ProjectFactory():
         replace template tokens within project
         """
 
+        file_replacement_patterns = [self.package_name,
+                                     "*.py",
+                                     "*.md",
+                                     "*.txt",
+                                     ".gitignore",
+                                     "MANIFEST.in"]
+
+        # "*.py" -o -name "*.txt"
+        file_pattern_arg = "\" -o -name \"".join(file_replacement_patterns)
+
         package_class = self.__get_package_class(self.package_name)
 
         escaped_package_path = re.escape(self.package_path).replace("/", "\\/")
@@ -237,14 +247,14 @@ class ProjectFactory():
         for key, value in replacements.items():
 
             # find . -type f recursively finds all files (only files)
-            # grep -v git ignores files matching the pattern git
+            # grep filters files matching the corresponding pattern
             # xargs converts the list of files into parameters for sed
             # sed -i '' 's/a/b/g' replaces the pattern a by b in the files
             replace_cmd = "cd %s " \
                           " && find . -type f " \
-                          " | grep -v \"git\\|.pyc\\|.joblib\\|.pickle\" " \
+                          " -name \"%s\" " \
                           " | xargs sed -i '' 's/%s/%s/g' " \
-                          % (self.package_path, key, value)
+                          % (self.package_path, file_pattern_arg, key, value)
 
             replace_code = os.system(replace_cmd)
 
