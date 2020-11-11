@@ -1,14 +1,22 @@
 
-# from KAMPAI_PACKAGE_NAME.trainer import Trainer
+from KAMPAI_PACKAGE_NAME.trainer.trainer import Trainer
+
+from colorama import Fore, Style
 
 
-# class App:
+class App:
 
-#     def fetch(self, nrows):
-#         pass
+    def __init__(self):
+        self.trainer = Trainer()
 
-#     def head(self, nrows):
-#         pass
+    def run(self):
 
-#     def train(self):
-#         pass
+        print(Fore.GREEN + "\nTraining model..."
+              + Style.RESET_ALL)
+
+        # training model
+        rmse = self.trainer.train()
+
+        print(Fore.GREEN + "\nModel trained, rmse: %s 👍"
+              % rmse
+              + Style.RESET_ALL)
