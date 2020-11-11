@@ -120,7 +120,19 @@ def gen(gist):
     generates gist code boilerplate in project
     """
 
-    print(gist)
+    assert_within_project()
+
+    # building destination path
+    package_name = get_package_name()
+    project_root = get_generated_project_top_level()
+
+    # locating gist code boilerplate (source path)
+    package_path = os.path.dirname(os.path.dirname(__file__))
+    template_path = os.path.join(package_path, "kampai", "gists", gist)
+
+    # creating gist code boilerplate
+    pf = ProjectFactory(package_name, project_root, template_path)
+    pf.generate_gist()
 
 
 @greet.command(help="fetch data from a csv ressource, "

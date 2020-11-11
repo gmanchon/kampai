@@ -68,6 +68,11 @@ class ProjectFactory():
         print(Fore.GREEN + "\nProject %s successfully created! 🎉 🍰"
               % self.package_name)
 
+    def generate_gist(self):
+
+        # copy gist content
+        self.__create_project_from_template(contents_only=True)
+
     def __assess_package_name(self):
         is_valid = bool(re.match(r"^[a-zA-Z]\w*", self.package_name))
 
@@ -144,12 +149,21 @@ class ProjectFactory():
 
                 exit(1)
 
-    def __create_project_from_template(self):
+    def __create_project_from_template(self, contents_only=False):
         """
         creates project from template
         """
 
-        copy_cmd = "cp -R %s %s" % (self.template_path, self.package_name)
+        # option to copy directory content instead of directory
+        contents = ""
+        if contents_only:
+            contents = "/."
+
+        # copy directory (or its content) to destination
+        copy_cmd = "cp -R %s%s %s" \
+            % (self.template_path,
+               contents,
+               self.package_path)
 
         copy_code = os.system(copy_cmd)
 
