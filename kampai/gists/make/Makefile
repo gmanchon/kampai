@@ -16,8 +16,11 @@ pytest:
 install_requirements:
 	pip install -r requirements.txt
 
-install_project:
+install_package:
 	pip install .
 
-install_project_dev_mode:
+install_package_dev_mode:
 	pip install -e .
+
+uninstall_package:
+	pip uninstall -y KAMPAI_PACKAGE_NAME

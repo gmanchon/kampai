@@ -241,10 +241,13 @@ class ProjectFactory():
         replace_patterns = [self.package_name,
                             "KAMPAI_PACKAGE_NAME",
                             "*.py",
+                            "*.yaml",
+                            "*.yml",
                             "*.md",
                             "*.txt",
                             ".gitignore",
-                            "MANIFEST.in"]
+                            "MANIFEST.in",
+                            "Makefile"]
 
         # "*.py" -o -name "*.txt"
         file_pattern_arg = "\" -o -type f -name \"".join(replace_patterns)
