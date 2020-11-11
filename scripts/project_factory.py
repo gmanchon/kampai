@@ -242,7 +242,7 @@ class ProjectFactory():
             # sed -i '' 's/a/b/g' replaces the pattern a by b in the files
             replace_cmd = "cd %s " \
                           " && find . -type f " \
-                          " | grep -v git " \
+                          " | grep -v \"git\\|.pyc\\|.joblib\\|.pickle\" " \
                           " | xargs sed -i '' 's/%s/%s/g' " \
                           % (self.package_path, key, value)
 
