@@ -76,6 +76,9 @@ class ProjectFactory():
         # replace tokens in gist content
         self.__replace_package_tokens()
 
+        # replace package slug
+        self.__replace_package_slug()
+
     def __assess_package_name(self):
         is_valid = bool(re.match(r"^[a-zA-Z]\w*", self.package_name))
 
@@ -270,17 +273,29 @@ class ProjectFactory():
 
         for key, value in dir_replacements.items():
 
-            dir_replace_cmd = "cd %s " \
-                              " && mv %s %s" % (self.package_name, key, value)
+            # list matching files and directories
+            match_list_cmd = "cd %s " \
+                              " && find . -iname %s" \
+                              % (self.package_path, key)
 
-            dir_replace_code = os.system(dir_replace_cmd)
+            matches = os.popen(match_list_cmd).read().split()
 
-            if dir_replace_code != 0:
-                print(Fore.RED + "Error replacing dir tokens: %s (%s) 😢"
-                      % (dir_replace_code, dir_replace_cmd)
-                      + Style.RESET_ALL)
+            # replace matches
+            for match in matches:
 
-                exit(1)
+                target = match.replace(key, value)
+                dir_replace_cmd = "cd %s " \
+                                  " && mv %s %s" \
+                                  % (self.package_path, match, target)
+
+                dir_replace_code = os.system(dir_replace_cmd)
+
+                if dir_replace_code != 0:
+                    print(Fore.RED + "Error replacing dir tokens: %s (%s) 😢"
+                          % (dir_replace_code, dir_replace_cmd)
+                          + Style.RESET_ALL)
+
+                    exit(1)
 
     def __commit_git_repo(self):
         """
