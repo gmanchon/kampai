@@ -215,16 +215,16 @@ class ProjectFactory():
         replace template tokens within project
         """
 
-        file_replacement_patterns = [self.package_name,
-                                     "KAMPAI_PACKAGE_NAME",
-                                     "*.py",
-                                     "*.md",
-                                     "*.txt",
-                                     ".gitignore",
-                                     "MANIFEST.in"]
+        replace_patterns = [self.package_name,
+                            "KAMPAI_PACKAGE_NAME",
+                            "*.py",
+                            "*.md",
+                            "*.txt",
+                            ".gitignore",
+                            "MANIFEST.in"]
 
         # "*.py" -o -name "*.txt"
-        file_pattern_arg = "\" -o -name \"".join(file_replacement_patterns)
+        file_pattern_arg = "\" -o -type f -name \"".join(replace_patterns)
 
         package_class = self.__get_package_class(self.package_name)
 
