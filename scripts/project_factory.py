@@ -216,6 +216,7 @@ class ProjectFactory():
         """
 
         file_replacement_patterns = [self.package_name,
+                                     "KAMPAI_PACKAGE_NAME",
                                      "*.py",
                                      "*.md",
                                      "*.txt",
