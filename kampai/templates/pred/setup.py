@@ -8,4 +8,5 @@ setup(name="KAMPAI_PACKAGE_NAME",
       version="1.0",
       description="KAMPAI_PACKAGE_DESCRIPTION",
       packages=find_packages(),
-      install_requires=requirements)
+      install_requires=requirements,
+      include_package_data=True)
