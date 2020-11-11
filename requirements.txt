@@ -1,3 +1,6 @@
+colorama
+pyyaml
+click
 numpy
 pandas
 sklearn
