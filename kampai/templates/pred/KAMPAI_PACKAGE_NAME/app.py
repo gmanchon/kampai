@@ -13,7 +13,7 @@ class App:
 
     def run(self):
 
-        print(Fore.GREEN + "\nTrain model..."
+        print(Fore.GREEN + "Train model..."
               + Style.RESET_ALL)
 
         # train model
