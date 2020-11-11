@@ -73,6 +73,9 @@ class ProjectFactory():
         # copy gist content
         self.__create_project_from_template(contents_only=True)
 
+        # replace tokens in gist content
+        self.__replace_package_tokens()
+
     def __assess_package_name(self):
         is_valid = bool(re.match(r"^[a-zA-Z]\w*", self.package_name))
 
@@ -238,7 +241,7 @@ class ProjectFactory():
                           " && find . -type f " \
                           " | grep -v git " \
                           " | xargs sed -i '' 's/%s/%s/g' " \
-                          % (self.package_name, key, value)
+                          % (self.package_path, key, value)
 
             replace_code = os.system(replace_cmd)
 
