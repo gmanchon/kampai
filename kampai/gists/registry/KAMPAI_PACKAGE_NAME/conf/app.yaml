@@ -1,2 +1,8 @@
 app:
-  name: 'KAMPAI_PACKAGE_NAME'
+  name: 'default app name'
+registry:
+  experiment_name: '[CC] [City] [username] project name'
+  model:
+    bucket_name: name-of-the-bucket
+  tracking:
+    server: https://url.of.the.mlflow.server/

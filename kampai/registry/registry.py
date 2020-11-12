@@ -118,6 +118,15 @@ class Registry():
         # log dict param
         self.tracking_repository.mlflow_log_dict_param(items, name)
 
+    def log_object_param(self, items, name):
+
+        # check whether registry is enabled
+        if not self.enabled:
+            return
+
+        # log object param
+        self.tracking_repository.mlflow_log_object_param(items, name)
+
     def log_metric(self, key, value):
 
         # check whether registry is enabled

@@ -14,3 +14,8 @@ registry:
   tracking:
     type: mlflow
     server: https://url.of.the.mlflow.server/
+trainer:
+  params:
+    a: 123
+  hyperparams:
+    b: (1, 2, 3)

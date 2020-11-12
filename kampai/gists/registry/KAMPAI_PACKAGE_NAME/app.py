@@ -41,7 +41,7 @@ class App:
               + Style.RESET_ALL)
 
         # log training
-        self.registry.log_dict_param(self.conf.trainer, "trainer")
+        self.registry.log_object_param(self.conf.trainer, "trainer")
         self.registry.log_metric("rmse", rmse)
         self.registry.log_model()
 
