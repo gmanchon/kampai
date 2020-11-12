@@ -3,6 +3,8 @@
 
 from colorama import Fore, Style
 
+from kampai.registry.registry import Registry
+
 from KAMPAI_PACKAGE_NAME.conf.app_conf import load_conf
 from KAMPAI_PACKAGE_NAME.trainer.trainer import Trainer
 
@@ -13,6 +15,12 @@ class App:
 
         # load conf
         self.conf = load_conf()
+
+        # load registry
+        print(Fore.GREEN + "\nLoading registry..."
+              + Style.RESET_ALL)
+
+        self.registry = Registry(self.conf.registry)
 
         # create trainer
         self.trainer = Trainer()
@@ -27,6 +35,17 @@ class App:
 
         print(Fore.GREEN + "\nModel trained, RMSE: %s 👍"
               % rmse
+              + Style.RESET_ALL)
+
+        print(Fore.GREEN + "\nLog training in registry... 🚀"
+              + Style.RESET_ALL)
+
+        # log training
+        self.registry.log_dict_param(self.conf.trainer, "trainer")
+        self.registry.log_metric("rmse", rmse)
+        self.registry.log_model()
+
+        print(Fore.GREEN + "\nTraining logged 👌"
               + Style.RESET_ALL)
 
 
