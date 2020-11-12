@@ -341,6 +341,10 @@ class ProjectFactory():
                     end_contents = " && rmdir %s " \
                         % match
 
+                # TODO update to iterate on sub directories
+                # in order to merge content
+                # otherwise existing sub directories will fail
+
                 # rename match
                 # `find . -name "__pycache__" | xargs rm -Rf`
                 # removes __pycache__ directories
