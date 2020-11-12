@@ -1,4 +1,6 @@
 
+from kampai.conf.conf_struct import ConfStruct
+
 from colorama import Fore, Style
 
 import yaml
