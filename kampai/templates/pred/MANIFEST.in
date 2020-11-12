@@ -1,0 +1,2 @@
+include KAMPAI_PACKAGE_NAME/conf/app.defaults.yaml
+include KAMPAI_PACKAGE_NAME/conf/app.yaml
