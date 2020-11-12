@@ -1,9 +1,13 @@
 
-# usage
+# install
 
 ``` bash
 pip install git+https://github.com/gmanchon/kampai
+```
 
+# usage
+
+``` bash
 kampai new PACKAGE            # creates a package boilerplate
 
 kampai gen GIST               # generates gist code boilerplate
