@@ -1,10 +1,10 @@
 # pylint: disable=missing-docstring
 
-from kampai.conf.conf_loader import ConfLoader
+from os.path import join, dirname
 
 from colorama import Fore, Style
 
-from os.path import join, dirname
+from kampai.conf.conf_loader import ConfLoader
 
 
 def load_conf():

@@ -1,12 +1,12 @@
 # pylint: disable=missing-docstring
 
-from kampai.conf.conf_struct import ConfStruct
-
-from colorama import Fore, Style
-
 import yaml
 import copy
 import re
+
+from colorama import Fore, Style
+
+from kampai.conf.conf_struct import ConfStruct
 
 
 class ConfLoader():
