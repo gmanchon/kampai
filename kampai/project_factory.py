@@ -342,8 +342,13 @@ class ProjectFactory():
                         % match
 
                 # rename match
+                # `find . -name "__pycache__" | xargs rm -Rf`
+                # removes __pycache__ directories
+                # which prevent moving all content of package slug directory
                 target = match.replace(key, value)
                 dir_replace_cmd = "cd %s " \
+                                  " && find . -name \"__pycache__\"" \
+                                  " | xargs rm -Rf " \
                                   " && mv %s%s %s " \
                                   " %s " \
                                   % (self.package_path,
