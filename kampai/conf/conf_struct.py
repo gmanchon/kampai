@@ -1,3 +1,4 @@
+# pylint: disable=missing-docstring
 
 from collections.abc import Mapping
 

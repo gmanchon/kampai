@@ -1,3 +1,4 @@
+# pylint: disable=missing-docstring
 
 from kampai.conf.conf_struct import ConfStruct
 
