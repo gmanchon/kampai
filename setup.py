@@ -6,7 +6,7 @@ requirements = [x.strip() for x in content]
 
 setup(name="kampai",
       version="0.1",
-      description="Data science project template generator",
+      description="Data science package template generator",
       packages=find_packages(),
       install_requires=requirements,
       include_package_data=True,

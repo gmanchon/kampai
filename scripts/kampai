@@ -40,7 +40,7 @@ def greet():
     pass
 
 
-@greet.command(help="create a data science project boilerplate")
+@greet.command(help="create a package boilerplate")
 @click.argument("package_name")
 @click.argument("source", default="default")
 def new(package_name, source):
