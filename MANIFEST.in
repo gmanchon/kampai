@@ -1,2 +1,3 @@
+include kampai/templates/pred/data/data.csv
 graft kampai
 prune __pycache__
