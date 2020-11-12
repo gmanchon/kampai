@@ -326,10 +326,15 @@ class ProjectFactory():
                 package_dir = "KAMPAI_PACKAGE_NAME"
                 package_dir_len = len(package_dir)
 
+                # check whether match is a directory
+                match_is_dir = os.path.isdir(match)
+
                 # check whether replacement is gist
                 # and match corresponds to package directory
                 # and its content only should be moved
-                if from_gist and match[-package_dir_len:] == package_dir:
+                if from_gist \
+                    and match_is_dir \
+                        and match[-package_dir_len:] == package_dir:
 
                     # move match content to package directory
                     move_contents = "/*"
