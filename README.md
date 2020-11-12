@@ -2,7 +2,7 @@
 # usage
 
 ``` bash
-pip install .
+pip install git+https://github.com/gmanchon/kampai
 
 kampai new PACKAGE            # creates a package boilerplate
 
