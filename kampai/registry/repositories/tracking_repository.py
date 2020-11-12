@@ -22,6 +22,18 @@ class TrackingRepository():
         # get conf
         self.mlflow_uri = conf.server
 
+        # check conf
+        self.disabled = not self.__check_valid_conf()
+
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Tracking repository disabled: "
+                  + "invalid mlflow url %s 😭\n"
+                  % self.mlflow_uri
+                  + Style.RESET_ALL
+                  + "Please configure the url of the mlflow server "
+                  + "in the app.yaml conf file entry \"mlflow_uri\"")
+
         # remove trailing slash if any
         if self.mlflow_uri[-1] == "/":
             self.mlflow_uri = self.mlflow_uri[:-1]
@@ -30,11 +42,27 @@ class TrackingRepository():
         mlflow.set_tracking_uri(self.mlflow_uri)
         self.mlflow_client = MlflowClient()
 
+    def __check_valid_conf(self):
+        """
+        checks whether conf is correct
+        """
+
+        # check whether default value is used for mlflow uri
+        return self.mlflow_uri != "https://url.of.the.mlflow.server/"
+
     @memoized_property
     def mlflow_experiment_id(self):
         """
         retrieves experiment if it already exists or creates it
         """
+
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Tracking repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
 
         try:
             # create experiment
@@ -49,6 +77,14 @@ class TrackingRepository():
         creates run for experiment and stores code commit hash,
         code storage location and model storage location in run tags
         """
+
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Tracking repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
 
         # run only once (TODO: use memoized property ?)
         if hasattr(self, 'mlflow_run'):
@@ -77,6 +113,14 @@ class TrackingRepository():
         stores a tag in a run
         """
 
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Tracking repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
+
         # set tag
         self.mlflow_client.set_tag(
             self.mlflow_run.info.run_id, key, value)
@@ -85,6 +129,14 @@ class TrackingRepository():
         """
         stores multiple tags in a run
         """
+
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Tracking repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
 
         # waiting for implementation of client set tags
         for key, value in items.items():
@@ -99,6 +151,14 @@ class TrackingRepository():
         logs a param in a run
         """
 
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Tracking repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
+
         # create run
         self.mlflow_create_run()
 
@@ -112,6 +172,14 @@ class TrackingRepository():
         stores a metric in a run
         """
 
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Tracking repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
+
         # create run
         self.mlflow_create_run()
 
@@ -124,6 +192,14 @@ class TrackingRepository():
         """
         stores nested parameters in a run
         """
+
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Tracking repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
 
         # create run
         self.mlflow_create_run()
@@ -142,6 +218,14 @@ class TrackingRepository():
         """
         stores nested objects and attributes in a run
         """
+
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Tracking repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
 
         # create run
         self.mlflow_create_run()

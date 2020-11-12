@@ -31,6 +31,14 @@ class Registry():
         self.conf = conf
         self.experiment = self.conf.experiment_name
 
+        if self.experiment_name == "[CC] [City] [username] project name":
+
+            print(Fore.RED + "\n⚠️ Incorrect experiment name: %s 😭\n"
+                  % self.experiment_name
+                  + Style.RESET_ALL
+                  + "Please configure the name of the experiment "
+                  + "in the app.yaml conf file entry \"experiment_name\"")
+
         # create run repository
         self.run_repository = RunRepository()
 

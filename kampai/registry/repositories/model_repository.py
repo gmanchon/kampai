@@ -21,13 +21,40 @@ class ModelRepository():
         self.local_path = conf.local_path
         self.model_filename = conf.model_filename
 
+        # check conf
+        self.disabled = not self.__check_valid_conf()
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Model repository disabled: "
+                  + "invalid bucket name %s 😭\n"
+                  % self.bucket_name
+                  + Style.RESET_ALL
+                  + "Please configure the name of the bucket "
+                  + "in the app.yaml conf file entry \"bucket_name\"")
+
         # client
         self.storage_client = storage.Client()
+
+    def __check_valid_conf(self):
+        """
+        checks whether conf is correct
+        """
+
+        # check whether default value is used for bucket name
+        return self.bucket_name != "name-of-the-bucket"
 
     def get_storage_location(self):
         """
         returns gcp model storage location
         """
+
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Model repository disabled..."
+                  + Style.RESET_ALL)
+
+            return "N/A"
 
         storage_location = "https://console.cloud.google.com/storage" \
             + f"/browser/{self.bucket_name}" \
@@ -41,6 +68,14 @@ class ModelRepository():
         """
         uploads model to gcp storage location
         """
+
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Model repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
 
         # get storage path
         storage_path = self.__get_model_storage_path()
@@ -68,6 +103,14 @@ class ModelRepository():
         returns a lists of gcp uploaded model runs (code commit hashes)
         """
 
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Model repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
+
         # list blobs from bucket
         blobs = self.storage_client.list_blobs(self.bucket_name)
 
@@ -82,6 +125,14 @@ class ModelRepository():
         """
         downloads from gcp a model defined by its run (code commit hash)
         """
+
+        # check conf
+        if self.disabled:
+
+            print(Fore.RED + "\n⚠️ Model repository disabled..."
+                  + Style.RESET_ALL)
+
+            return
 
         # get storage path
         storage_path = self.__get_model_storage_path(run)
