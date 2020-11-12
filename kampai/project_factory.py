@@ -78,7 +78,7 @@ class ProjectFactory():
         self.__replace_package_tokens()
 
         # replace package slug
-        self.__replace_package_slug()
+        self.__replace_package_slug(from_gist=True)
 
         print(Fore.GREEN + "\nGist successfully generated! 🎉 🥂"
               + Style.RESET_ALL)
@@ -292,7 +292,7 @@ class ProjectFactory():
 
                 exit(1)
 
-    def __replace_package_slug(self):
+    def __replace_package_slug(self, from_gist=False):
         """
         renames template package folder according to project name
         """
@@ -320,10 +320,32 @@ class ProjectFactory():
             # replace matches
             for match in matches:
 
+                move_contents = ""
+                end_contents = ""
+
+                package_dir = "KAMPAI_PACKAGE_NAME"
+                package_dir_len = len(package_dir)
+
+                # check whether replacement is gist
+                # and match corresponds to package directory
+                # and its content only should be moved
+                if from_gist and match[-package_dir_len:] == package_dir:
+
+                    # move match content to package directory
+                    move_contents = "/*"
+                    end_contents = " && rmdir %s " \
+                        % match
+
+                # rename match
                 target = match.replace(key, value)
                 dir_replace_cmd = "cd %s " \
-                                  " && mv %s %s" \
-                                  % (self.package_path, match, target)
+                                  " && mv %s%s %s " \
+                                  " %s " \
+                                  % (self.package_path,
+                                     match,
+                                     move_contents,
+                                     target,
+                                     end_contents)
 
                 dir_replace_code = os.system(dir_replace_cmd)
 

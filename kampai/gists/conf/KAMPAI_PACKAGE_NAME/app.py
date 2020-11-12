@@ -3,12 +3,16 @@
 
 from colorama import Fore, Style
 
+from KAMPAI_PACKAGE_NAME.conf.app_conf import load_conf
 from KAMPAI_PACKAGE_NAME.trainer.trainer import Trainer
 
 
 class App:
 
     def __init__(self):
+
+        # load conf
+        self.conf = load_conf()
 
         # create trainer
         self.trainer = Trainer()

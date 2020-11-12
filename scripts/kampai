@@ -114,7 +114,7 @@ def new(package_name, source):
 
 @greet.command(help="generate gist code boilerplate")
 @click.argument("gist", type=click.Choice(
-    ["make", "script", "test", "ci"],
+    ["make", "script", "test", "ci", "conf"],
     case_sensitive=False))
 def gen(gist):
     """
