@@ -228,6 +228,7 @@ class ProjectFactory():
 
             exit(1)
 
+        # splitting commands is required for linux
         git_commit_cmd = "cd %s " \
                          " && git add . " \
                          " && git commit -m 'initial commit %sby %s' " \
