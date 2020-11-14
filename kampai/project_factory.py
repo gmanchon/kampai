@@ -217,13 +217,28 @@ class ProjectFactory():
 
         git_init_cmd = "cd %s " \
                        " && git init &>/dev/null " \
-                       " && git add . " \
-                       " && git commit -m 'initial commit %sby %s' &>/dev/null" \
-                       % (self.package_name, source_template, COMMIT_SIGNATURE)
+                       % (self.package_name)
 
         git_init_code = os.system(git_init_cmd)
 
         if git_init_code != 0:
+            print(Fore.RED + "Error initializing git repo: %s 🥺"
+                  % git_init_code
+                  + Style.RESET_ALL)
+
+            exit(1)
+
+        git_commit_cmd = "cd %s " \
+                         " && git add . " \
+                         " && git commit -m 'initial commit %sby %s' " \
+                         " &>/dev/null" \
+                         % (self.package_name,
+                            source_template,
+                            COMMIT_SIGNATURE)
+
+        git_commit_code = os.system(git_commit_cmd)
+
+        if git_commit_code != 0:
             print(Fore.RED + "Error initializing git repo: %s 🥺"
                   % git_init_code
                   + Style.RESET_ALL)
