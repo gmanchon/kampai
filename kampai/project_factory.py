@@ -228,6 +228,10 @@ class ProjectFactory():
 
             exit(1)
 
+        # ugly fix for windows
+        import time
+        time.sleep(.5)
+
         # splitting commands is required for linux
         git_commit_cmd = "cd %s " \
                          " && git add . " \
