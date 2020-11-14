@@ -98,7 +98,7 @@ class ProjectFactory():
         ensures cwd is not within a git repo
         """
 
-        git_cmd = "git status"
+        git_cmd = "git status 2>/dev/null"
 
         git_code = os.system(git_cmd)
 
