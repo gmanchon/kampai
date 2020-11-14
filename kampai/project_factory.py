@@ -280,7 +280,7 @@ class ProjectFactory():
             replace_cmd = "cd %s " \
                           " && find . -type f " \
                           " -name \"%s\" " \
-                          " | xargs sed -i s/%s/%s/g' " \
+                          " | xargs sed -i 's/%s/%s/g' " \
                           % (self.package_path, file_pattern_arg, key, value)
 
             replace_code = os.system(replace_cmd)
