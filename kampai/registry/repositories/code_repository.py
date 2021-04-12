@@ -92,7 +92,11 @@ class CodeRepository():
 
         git_status = os.popen(git_status_cmd).read()
 
-        return "nothing to commit, working tree clean" in git_status
+        clean_status = (
+            "nothing to commit, working tree clean" in git_status or
+            "nothing to commit (create/copy files and use \"git add\" to track)" in git_status)
+
+        return clean_status
 
     def __get_latest_commit_hash(self):
         """
